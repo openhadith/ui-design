@@ -320,6 +320,14 @@
           <div style="display:flex; flex-direction:column; gap:14px;">
             <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:11.5px; font-weight:600; color:#5c564a;">ناوی تەواو</span><input value="{{ form.name }}" onInput="{{ onName }}" placeholder="نموونە: د. سارا" style="height:38px; padding:0 12px; font-size:13px; color:#2b2925; background:#fff; border:1px solid #ddd7ca; border-radius:8px; outline:none;" /></label>
             <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:11.5px; font-weight:600; color:#5c564a;">ئیمەیڵ</span><input value="{{ form.email }}" onInput="{{ onEmail }}" placeholder="name@muhaqqiq.org" dir="ltr" style="height:38px; padding:0 12px; font-size:13px; color:#2b2925; background:#fff; border:1px solid #ddd7ca; border-radius:8px; outline:none; text-align:right;" /></label>
+            <label style="display:flex; flex-direction:column; gap:6px;"><span style="font-size:11.5px; font-weight:600; color:#5c564a;">وشەی نهێنیی سەرەتایی</span>
+              <div style="display:flex; align-items:center; gap:9px; height:38px; padding:0 12px; background:#fff; border:1px solid #ddd7ca; border-radius:8px;">
+                <span style="font-size:14px; color:#b0a892;">⚿</span>
+                <input value="{{ form.password }}" onInput="{{ onPassword }}" type="{{ passType }}" placeholder="لانیکەم ٨ پیت" dir="rtl" autocomplete="new-password" style="flex:1; min-width:0; border:none; outline:none; background:transparent; font-size:13px; color:#2b2925; text-align:right; letter-spacing:1px;" />
+                <span onClick="{{ togglePass }}" style="cursor:pointer; font-size:11px; font-weight:600; color:#8a8272; user-select:none; white-space:nowrap;">{{ passReveal }}</span>
+              </div>
+              <span style="font-size:10.5px; color:#a89f8c;">بەکارهێنەر لە یەکەم چوونەژوورەوەدا داوای گۆڕینی لێدەکرێت</span>
+            </label>
             <div style="display:flex; flex-direction:column; gap:7px;"><span style="font-size:11.5px; font-weight:600; color:#5c564a;">ڕۆڵی گشتی</span>
               <div style="display:flex; gap:7px; flex-wrap:wrap;">
                 <sc-for list="{{ roleChoices }}" as="r" hint-placeholder-count="5">
@@ -586,7 +594,7 @@ class Component extends DCLogic {
       } else if (m==='addUser') {
         const name=(S.form.name||'').trim(); if(!name){ this.close(); return; }
         const ri=S.form.roleIdx==null?2:S.form.roleIdx;
-        this.setState(s => ({ users:[...s.users, { name, email:(s.form.email||'').trim()||'—', avt:'b', role:GROLE_KEYS[ri], status:'on', last:'نوێ' }], modal:null, form:{}, tab:'users' }));
+        this.setState(s => ({ users:[...s.users, { name, email:(s.form.email||'').trim()||'—', avt:'b', role:GROLE_KEYS[ri], status:'on', last:'نوێ', password:(s.form.password||'') }], modal:null, form:{}, tab:'users', showPass:false }));
       } else if (m==='addBook') {
         const bn=(S.form.bookName||'').trim(); if(!bn){ this.close(); return; }
         this.setState(s => { const teams=s.teams.map(x=>({...x, books:[...x.books]})); if(!teams[s.selTeam].books.includes(bn)) teams[s.selTeam].books.push(bn); return { teams, modal:null, form:{} }; });
@@ -634,7 +642,9 @@ class Component extends DCLogic {
       modalTitle: mi.title, modalSub: mi.sub, modalIcon: mi.icon, modalIconBg: mi.bg, modalIconFg: mi.fg,
       primaryLabel: mi.primary, primaryBg: mi.pBg, modalPrimary: submit, closeModal: () => this.close(),
       confirmBody: m==='deleteTeam' ? ('دڵنیایت لە سڕینەوەی «'+st.name+'»؟ هەموو دەستنیشانکردنەکانی ئەندام و پەرتووک لادەبردرێن.') : ('تیمی «'+st.name+'» ئەرشیف دەکرێت و لە لیستی چالاکەکان لادەبردرێت. دەتوانرێت دواتر بگەڕێتەوە.'),
-      form: S.form, onName: onField('name'), onScope: onField('scope'), onEmail: onField('email'),
+      form: S.form, onName: onField('name'), onScope: onField('scope'), onEmail: onField('email'), onPassword: onField('password'),
+      passType: S.showPass ? 'text' : 'password', passReveal: S.showPass ? 'شاردنەوە' : 'پیشاندان',
+      togglePass: () => this.setState(s => ({ showPass: !s.showPass })),
       colorSwatches, roleChoices, candidates, noCandidates: candidates.length===0,
       pin1: pin(1), pin2: pin(2),
     };
