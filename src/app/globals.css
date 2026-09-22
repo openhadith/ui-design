@@ -1,0 +1,75 @@
+/*
+ * Base styles for the dashboard.
+ *
+ * Deliberately small: Ant Design supplies component styling and its own reset,
+ * and `src/lib/theme.ts` maps its tokens onto the design palette. Only the
+ * things AntD does not own live here.
+ */
+
+:root {
+  /* Surfaces, from design/*.dc.html — kept in sync with src/lib/tokens.ts */
+  --paper: #e7e3da;
+  --raised: #fffdf8;
+  --ink: #2b2925;
+  --emerald: #2f6f5b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-outfit), var(--font-plex-arabic), 'Noto Sans Arabic', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  /* The dashboard is an app shell that owns the viewport; only its centre
+     pane scrolls. */
+  overflow: hidden;
+}
+
+/* The comps' quieter scrollbars — a dense workstation with default macOS
+   scrollbars reads noisier than it should. */
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cfc9bc;
+  border-radius: 6px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b6afa0;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Keyboard cursor row in the validation queue. The queue is driven by ↑↓ as
+   much as by the mouse, so the focused row needs a marker that survives AntD's
+   own hover and selection backgrounds. */
+.studio-row-cursor > td {
+  background: #f2efe7 !important;
+  box-shadow: inset 3px 0 0 0 var(--emerald);
+}
+
+@keyframes omFade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
