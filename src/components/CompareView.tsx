@@ -11,7 +11,7 @@ import { useStudio } from './StudioContext';
 import { useToast } from './useToast';
 import type { CorpusHadith } from '@/lib/corpus';
 import { diffWords, type DiffOp } from '@/lib/diff';
-import { c, toAr } from '@/lib/tokens';
+import { c, toAr, shell } from '@/lib/tokens';
 
 const { Text, Title, Paragraph } = Typography;
 
@@ -89,7 +89,7 @@ export default function CompareView({
       <div
         style={{
           flex: 'none', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 10,
-          borderBottom: `1px solid ${c.lineStrong}`, flexWrap: 'wrap',
+          borderBottom: `1px solid ${shell.cardBorder}`, flexWrap: 'wrap',
         }}
       >
         <Title level={4} style={{ margin: 0 }}>بەراورد</Title>

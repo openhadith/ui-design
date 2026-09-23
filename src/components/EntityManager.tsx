@@ -13,7 +13,7 @@ import {
 import { useStudio } from './StudioContext';
 import { useToast } from './useToast';
 import { ENTITIES, type EntityType, type FieldDef } from '@/lib/entities';
-import { c, toAr } from '@/lib/tokens';
+import { c, toAr, shell } from '@/lib/tokens';
 
 const { Text } = Typography;
 
@@ -237,7 +237,7 @@ export default function EntityManager({ type }: { type: EntityType }) {
       <div
         style={{
           flex: 'none', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 12,
-          borderBottom: `1px solid ${c.lineStrong}`, flexWrap: 'wrap',
+          borderBottom: `1px solid ${shell.cardBorder}`, flexWrap: 'wrap',
         }}
       >
         <Typography.Title level={4} style={{ margin: 0 }}>{def.labelPlural}</Typography.Title>
@@ -260,7 +260,7 @@ export default function EntityManager({ type }: { type: EntityType }) {
         </Space>
       </div>
 
-      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '14px 20px 30px' }}>
+      <div className="surface">
         {binOpen && (
           <Alert
             type="warning"

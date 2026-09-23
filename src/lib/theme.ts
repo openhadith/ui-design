@@ -1,5 +1,5 @@
 import type { ThemeConfig } from 'antd';
-import { c } from './tokens';
+import { c, shell } from './tokens';
 
 /**
  * Ant Design theme, mapped onto the studio palette.
@@ -38,9 +38,9 @@ export const studioTheme: ThemeConfig = {
     colorErrorBorder: '#e8cdc5',
 
     // --- surfaces
-    colorBgLayout: c.page,
-    colorBgContainer: c.raised,
-    colorBgElevated: c.raised,
+    colorBgLayout: shell.canvas,
+    colorBgContainer: shell.card,
+    colorBgElevated: shell.card,
     colorBgSpotlight: c.inkStrong,
 
     // --- ink
@@ -51,9 +51,9 @@ export const studioTheme: ThemeConfig = {
     colorTextHeading: c.inkStrong,
 
     // --- hairlines
-    colorBorder: c.lineNav,
-    colorBorderSecondary: c.lineSoft,
-    colorSplit: c.lineSoft,
+    colorBorder: shell.cardBorder,
+    colorBorderSecondary: shell.cardBorderSoft,
+    colorSplit: shell.cardBorderSoft,
 
     /*
      * --- shape and rhythm
@@ -67,21 +67,29 @@ export const studioTheme: ThemeConfig = {
      * Controls grow with the text — AntD's 32px default control is cramped
      * around 15px type.
      */
-    fontSize: 15,
-    fontSizeSM: 13,
-    fontSizeLG: 17,
-    fontSizeHeading1: 30,
-    fontSizeHeading2: 24,
-    fontSizeHeading3: 20,
-    fontSizeHeading4: 17,
-    fontSizeHeading5: 15,
-    borderRadius: 8,
-    borderRadiusLG: 11,
-    borderRadiusSM: 6,
-    controlHeight: 38,
-    controlHeightSM: 32,
-    controlHeightLG: 44,
-    lineHeight: 1.7,
+    fontSize: 14,
+    fontSizeSM: 12.5,
+    fontSizeLG: 16,
+    fontSizeHeading1: 28,
+    fontSizeHeading2: 21,
+    fontSizeHeading3: 17,
+    fontSizeHeading4: 15,
+    fontSizeHeading5: 14,
+    // Tight corners, as the house dashboards use — 11px reads soft and toylike
+    // next to a hairline card.
+    borderRadius: 6,
+    borderRadiusLG: 8,
+    borderRadiusSM: 4,
+    borderRadiusXS: 3,
+    controlHeight: 34,
+    controlHeightSM: 28,
+    controlHeightLG: 40,
+    lineHeight: 1.65,
+
+    // Near-invisible: a card is defined by its hairline, with the shadow only
+    // lifting it a fraction off the surface.
+    boxShadow: shell.shadowSm,
+    boxShadowSecondary: shell.shadowMd,
 
     /**
      * The public site's stack, so the two applications read as one product.
@@ -95,44 +103,21 @@ export const studioTheme: ThemeConfig = {
   },
 
   components: {
-    Layout: {
-      headerBg: c.bar,
-      headerHeight: 60,
-      headerPadding: '0 16px',
-      siderBg: c.nav,
-      bodyBg: c.page,
-      footerBg: c.bar,
-    },
-    Menu: {
-      itemBg: 'transparent',
-      subMenuItemBg: 'transparent',
-      itemSelectedBg: c.emeraldSoft,
-      itemSelectedColor: c.emerald,
-      itemColor: c.inkMuted,
-      itemHoverBg: c.sunken,
-      itemHeight: 40,
-      itemMarginInline: 8,
-      iconSize: 14,
-      collapsedIconSize: 15,
-    },
+    Pagination: { itemSize: 30, fontSize: 13 },
+    Tooltip: { fontSize: 12.5, borderRadius: 5 },
     Table: {
-      headerBg: c.bar,
-      headerColor: c.inkDim,
-      headerSplitColor: c.lineSoft,
-      rowHoverBg: c.sunken,
+      headerBg: shell.sunken,
+      headerColor: c.inkFaint,
+      headerSplitColor: shell.cardBorderSoft,
+      rowHoverBg: shell.sunken,
       rowSelectedBg: c.emeraldSoft,
       rowSelectedHoverBg: c.emeraldTint,
-      borderColor: c.lineSoft,
+      borderColor: shell.cardBorderSoft,
       cellPaddingBlock: 11,
       cellPaddingInline: 14,
-      footerBg: c.bar,
+      fontSize: 13.5,
     },
-    Card: {
-      headerBg: 'transparent',
-      headerFontSize: 14,
-      colorBorderSecondary: c.lineCard,
-      paddingLG: 16,
-    },
+    Card: { headerBg: 'transparent', boxShadow: 'none', colorBorderSecondary: shell.cardBorder },
     Tabs: {
       itemColor: c.inkBody,
       itemSelectedColor: c.emerald,
@@ -140,11 +125,7 @@ export const studioTheme: ThemeConfig = {
       inkBarColor: c.emerald,
       horizontalMargin: '0 0 12px 0',
     },
-    Tag: {
-      defaultBg: c.sunken,
-      defaultColor: c.inkMuted,
-      borderRadiusSM: 6,
-    },
+    Tag: { defaultBg: shell.sunken, defaultColor: c.inkMuted, borderRadiusSM: 4, fontSize: 12 },
     Button: {
       primaryShadow: 'none',
       defaultShadow: 'none',
@@ -153,17 +134,13 @@ export const studioTheme: ThemeConfig = {
     },
     Input: { activeShadow: `0 0 0 2px ${c.emerald}1f` },
     Select: { optionSelectedBg: c.emeraldSoft },
-    Modal: { headerBg: c.raised, contentBg: c.raised, titleFontSize: 17 },
+Modal: { headerBg: shell.card, contentBg: shell.card, titleFontSize: 16, borderRadiusLG: 8 },
     Drawer: { footerPaddingBlock: 12, footerPaddingInline: 16 },
-    Statistic: { titleFontSize: 13, contentFontSize: 26 },
+Statistic: { titleFontSize: 12.5, contentFontSize: 28 },
     Descriptions: { labelBg: c.sunken, titleMarginBottom: 8 },
-    Segmented: {
-      itemSelectedBg: c.raised,
-      itemSelectedColor: c.emerald,
-      trackBg: c.sunken,
-    },
+    Segmented: { itemSelectedBg: shell.card, itemSelectedColor: c.emerald, trackBg: '#f1eee7', borderRadius: 5 },
     Progress: { defaultColor: c.emerald, remainingColor: c.line },
-    Badge: { textFontSize: 12 },
+Badge: { textFontSize: 11.5 },
     Alert: { withDescriptionPadding: '12px 16px' },
   },
 };

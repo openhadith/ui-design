@@ -191,3 +191,38 @@ export function todayLabel(d = new Date()): string {
     return weekday;
   }
 }
+
+/**
+ * Shell surfaces.
+ *
+ * The application frame follows the house dashboard language: a dark fixed
+ * rail, a sticky white header, an edge-to-edge working surface, and cards
+ * defined by a hairline and a near-invisible shadow rather than by a grey
+ * page behind them. The brand hues above are unchanged — only the furniture
+ * is new.
+ */
+export const shell = {
+  /** Rail: near-black with a green cast, so it sits under the brand. */
+  railTop: '#17211d',
+  railBottom: '#121a17',
+  railBorder: '#24302b',
+  railText: 'rgba(255,255,255,.52)',
+  railTextHover: 'rgba(255,255,255,.82)',
+  railHover: 'rgba(255,255,255,.04)',
+  railActive: 'rgba(255,255,255,.06)',
+  railGroup: 'rgba(255,255,255,.36)',
+  /** The active row's thumb — gold, as the comps use for emphasis. */
+  railAccent: '#c79a3a',
+
+  headerBg: '#ffffff',
+  /** Working surface: a warm white, one shade off the card white. */
+  canvas: '#fffdf9',
+  card: '#ffffff',
+  cardBorder: '#efeae0',
+  cardBorderSoft: '#f5f2ec',
+  /** A quiet secondary surface for rails and toolbars inside a page. */
+  sunken: '#faf8f3',
+
+  shadowSm: '0 1px 3px rgba(35, 30, 20, .05)',
+  shadowMd: '0 2px 10px rgba(35, 30, 20, .08)',
+} as const;

@@ -3,19 +3,17 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, type ReactNode } from 'react';
-import { Avatar, Badge, Button, Dropdown, Layout, Menu, Segmented, Spin, Tag, Tooltip } from 'antd';
+import { Avatar, Dropdown, Segmented, Spin, Tag, Tooltip } from 'antd';
 import {
-  AppstoreOutlined, AuditOutlined, BarChartOutlined, BankOutlined, BookOutlined, CheckSquareOutlined,
-  DatabaseOutlined, DeploymentUnitOutlined, DiffOutlined, ExportOutlined, LogoutOutlined,
-  ReadOutlined, SafetyOutlined, ScheduleOutlined, SwapOutlined, TagsOutlined, TeamOutlined,
-  UserOutlined,
+  AppstoreOutlined, AuditOutlined, BankOutlined, BarChartOutlined, BookOutlined,
+  CheckSquareOutlined, DatabaseOutlined, DeploymentUnitOutlined, DiffOutlined,
+  ExportOutlined, LogoutOutlined, ReadOutlined, SafetyOutlined, ScheduleOutlined,
+  SwapOutlined, TagsOutlined, TeamOutlined, UserOutlined,
 } from '@ant-design/icons';
 import { useStudio } from './StudioContext';
 import CommandPalette from './CommandPalette';
 import { SITE_URL } from '@/lib/site';
 import { avatarOf, c, initials, ISSUE, ROLE_LABEL, toAr } from '@/lib/tokens';
-
-const { Header, Sider, Content } = Layout;
 
 /** Routes that render without the app chrome. */
 const BARE_ROUTES = ['/login'];
@@ -54,12 +52,17 @@ const ADMIN_NAV: NavItem[] = [
   { key: '/admin/quality', icon: <DatabaseOutlined />, label: 'جۆری داتا' },
 ];
 
+/** The header label for the current route — the page's name, beside the brand. */
+const TITLES: Record<string, string> = Object.fromEntries(
+  [...WORK_NAV, ...DATA_NAV, ...ADMIN_NAV].map((i) => [i.key, i.label]),
+);
+
 export default function StudioChrome({
   children, pendingCount, collections = [], corpus,
 }: {
   children: ReactNode;
   pendingCount?: number;
-  /** Open issues by type — the comps' "smart collections". */
+  /** Open issues by type — the "smart collections". */
   collections?: Array<{ type: string; count: number }>;
   corpus?: { hadiths: number | null; books: number | null; narrators: number | null };
 }) {
@@ -79,12 +82,7 @@ export default function StudioChrome({
 
   if (loading || !user) {
     return (
-      <div
-        style={{
-          position: 'fixed', inset: 0, display: 'flex', alignItems: 'center',
-          justifyContent: 'center', background: c.page,
-        }}
-      >
+      <div style={{ display: 'grid', placeItems: 'center', height: '100vh' }}>
         <Spin size="large" />
       </div>
     );
@@ -92,251 +90,196 @@ export default function StudioChrome({
 
   const tone = avatarOf(user.avatar_tone);
 
-  const toItems = (items: NavItem[]) =>
-    items
-      .filter((i) => !i.requires || can(i.requires))
-      .map((i) => ({
-        key: i.key,
-        icon: i.icon,
-        label: (
-          <Link href={i.key} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ flex: 1 }}>{i.label}</span>
-            {i.badge === 'pending' && pendingCount ? (
-              <Badge
-                count={toAr(pendingCount)}
-                overflowCount={9999}
-                style={{ background: c.goldSoft, color: c.goldFg, boxShadow: 'none', fontSize: 12.5 }}
-              />
-            ) : null}
-          </Link>
-        ),
-      }));
-
-  // Longest matching prefix, so /studio/hadith/123 highlights حەدیس and
-  // /studio alone does not swallow every child route.
+  // Longest matching prefix, so /hadith/123 highlights حەدیس and "/" does not
+  // swallow every child route.
   const allKeys = [...WORK_NAV, ...DATA_NAV, ...ADMIN_NAV].map((i) => i.key);
-  const selected =
+  const active =
     allKeys
       .filter((k) => (k === '/' ? pathname === k : pathname.startsWith(k)))
       .sort((a, b) => b.length - a.length)[0]
-    ?? (pathname.startsWith('/hadith/') ? '/hadiths' : '/');
+    ?? (pathname.startsWith('/hadith/') ? '/hadiths'
+      : pathname.startsWith('/narrator/') ? '/narrators' : '/');
+
+  const renderItems = (items: NavItem[]) =>
+    items
+      .filter((i) => !i.requires || can(i.requires))
+      .map((i) => (
+        <Link
+          key={i.key}
+          href={i.key}
+          className={`rail-item${i.key === active ? ' is-active' : ''}`}
+        >
+          <span className="anticon">{i.icon}</span>
+          <span className="rail-label">{i.label}</span>
+          {i.badge === 'pending' && pendingCount ? (
+            <span className="rail-count">{toAr(pendingCount)}</span>
+          ) : null}
+        </Link>
+      ));
+
+  const adminVisible = ADMIN_NAV.some((i) => !i.requires || can(i.requires));
 
   return (
-    <Layout style={{ position: 'fixed', inset: 0, zIndex: 50, overflow: 'hidden' }}>
-      <Header
-        style={{
-          display: 'flex', alignItems: 'center', gap: 16, flex: 'none',
-          borderBottom: `1px solid ${c.lineStrong}`, paddingInline: 16,
-        }}
-      >
-        <Link
-          href="/"
-          style={{ display: 'flex', alignItems: 'center', gap: 10, color: 'inherit' }}
-        >
-          <div
-            style={{
-              width: 30, height: 30, borderRadius: 7, background: c.emerald, color: '#fff',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontFamily: 'var(--font-amiri), serif', fontWeight: 700, fontSize: 19,
-            }}
-          >
-            ح
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
-            <span style={{ fontSize: 15.5, fontWeight: 600 }}>دەزگای پەسەندکردنی حەدیس</span>
-            <span style={{ fontSize: 13, color: c.inkDim }}>Muhaqqiq · وۆرک‌ستەیشن</span>
-          </div>
+    <>
+      <nav className="rail">
+        <Link href="/" className="rail-brand">
+          <span className="rail-mark">ح</span>
+          <span className="rail-wordmark">
+            <b>دەزگای حەدیس</b>
+            <span>Muhaqqiq · وۆرک‌ستەیشن</span>
+          </span>
         </Link>
 
-        <div style={{ flex: 1, display: 'flex', justifyContent: 'center', minWidth: 0 }}>
-          <CommandPalette
-            commands={[...WORK_NAV, ...DATA_NAV, ...ADMIN_NAV]
-              .filter((i) => !i.requires || can(i.requires))
-              .map((i) => ({ key: i.key, label: i.label, icon: i.icon }))}
-          />
-        </div>
+        <div className="rail-scroll">
+          <div className="rail-group">کار</div>
+          {renderItems(WORK_NAV)}
 
-        {/* The comps' language switcher. Shown because it is part of the
-            design, but disabled: the dashboard has no translations yet, and a
-            control that silently does nothing is worse than an honest one. */}
-        <Tooltip title="لە ئێستادا تەنها کوردی بەردەستە">
-          <Segmented
-            size="small"
-            value="ku"
-            disabled
-            options={[
-              { value: 'ku', label: 'کوردی' },
-              { value: 'ar', label: 'ع' },
-              { value: 'en', label: 'EN' },
-            ]}
-          />
-        </Tooltip>
+          <div className="rail-group">داتا</div>
+          {renderItems(DATA_NAV)}
 
-        <Tooltip title="داتای حەدیس ڕاستەقینەیە؛ دۆخی کار نموونەییە و کاریگەری لەسەر ماڵپەڕی گشتی نییە">
-          <Tag color="warning" style={{ marginInlineEnd: 0 }}>نموونە</Tag>
-        </Tooltip>
+          {adminVisible && (
+            <>
+              <div className="rail-group">بەڕێوەبردن</div>
+              {renderItems(ADMIN_NAV)}
+            </>
+          )}
 
-        <Button
-          size="small"
-          icon={<ExportOutlined />}
-          href={SITE_URL}
-          target="_blank"
-        >
-          ماڵپەڕی گشتی
-        </Button>
-
-        <Dropdown
-          menu={{
-            items: [
-              {
-                key: 'who',
-                disabled: true,
-                label: (
-                  <div style={{ paddingBlock: 4 }}>
-                    <div style={{ fontSize: 14, fontWeight: 600, color: c.ink }}>{user.name}</div>
-                    <div dir="ltr" style={{ fontSize: 13, color: c.inkGhost, textAlign: 'start' }}>
-                      {user.email}
-                    </div>
-                  </div>
-                ),
-              },
-              { type: 'divider' },
-              {
-                key: 'role',
-                disabled: true,
-                icon: <SafetyOutlined />,
-                label: (
-                  <span style={{ fontSize: 13.5 }}>
-                    {ROLE_LABEL[user.role] ?? user.role}
-                  </span>
-                ),
-              },
-              { type: 'divider' },
-              {
-                key: 'logout',
-                icon: <LogoutOutlined />,
-                label: 'دەرچوون',
-                onClick: logout,
-              },
-            ],
-          }}
-          trigger={['click']}
-        >
-          <button
-            style={{
-              display: 'flex', alignItems: 'center', gap: 8, height: 40, padding: '0 6px',
-              background: 'transparent', border: 'none', borderRadius: 8, cursor: 'pointer',
-              fontFamily: 'inherit',
-            }}
-          >
-            <div style={{ textAlign: 'start', lineHeight: 1.2 }}>
-              <div style={{ fontSize: 13.5, fontWeight: 600, color: c.ink }}>{user.name}</div>
-              <div style={{ fontSize: 12.5, color: c.inkDim }}>
-                {ROLE_LABEL[user.role] ?? user.role}
-              </div>
-            </div>
-            <Avatar
-              size={34}
-              style={{ background: tone.bg, color: tone.fg, fontSize: 13, fontWeight: 600 }}
-            >
-              {initials(user.name)}
-            </Avatar>
-          </button>
-        </Dropdown>
-      </Header>
-
-      <Layout style={{ minHeight: 0 }}>
-        <Sider
-          width={248}
-          style={{
-            borderInlineStart: `1px solid ${c.lineNav}`,
-            overflowY: 'auto',
-            paddingBlock: 8,
-          }}
-        >
-          <Menu
-            mode="inline"
-            selectedKeys={[selected]}
-            style={{ border: 'none', background: 'transparent' }}
-            items={[
-              { key: 'g-work', type: 'group', label: <GroupLabel>کار</GroupLabel>, children: toItems(WORK_NAV) },
-              { key: 'g-data', type: 'group', label: <GroupLabel>داتا</GroupLabel>, children: toItems(DATA_NAV) },
-              ...(ADMIN_NAV.some((i) => !i.requires || can(i.requires))
-                ? [{
-                    key: 'g-admin',
-                    type: 'group' as const,
-                    label: <GroupLabel>بەڕێوەبردن</GroupLabel>,
-                    children: toItems(ADMIN_NAV),
-                  }]
-                : []),
-            ]}
-          />
-
-          {/* Smart collections: the open issues, as one-click entries into the
-              queue. Counts are live, so an empty category simply disappears. */}
+          {/* Smart collections: open issues, one click into the queue. Counts
+              are live, so an empty category simply disappears. */}
           {collections.length > 0 && (
-            <div style={{ padding: '4px 8px 12px' }}>
-              <div style={{ padding: '8px 12px 6px' }}>
-                <GroupLabel>کۆکراوە زیرەکەکان</GroupLabel>
-              </div>
+            <>
+              <div className="rail-group">کۆکراوە زیرەکەکان</div>
               {collections.map((col) => {
                 const token = ISSUE[col.type];
                 if (!token) return null;
                 return (
-                  <Link
-                    key={col.type}
-                    href={`/queue?issue=${col.type}`}
-                    style={{
-                      display: 'flex', alignItems: 'center', gap: 9, padding: '6px 12px',
-                      borderRadius: 8, color: c.inkMuted, fontSize: 13.5,
-                    }}
-                  >
-                    <span style={{ width: 8, height: 8, borderRadius: 2, background: token.dot, flex: 'none' }} />
-                    <span style={{ flex: 1 }}>{token.label}</span>
-                    <span style={{ fontSize: 13, color: c.inkGhost }}>{toAr(col.count)}</span>
+                  <Link key={col.type} href={`/queue?issue=${col.type}`} className="rail-collection">
+                    <i style={{ background: token.dot }} />
+                    <span>{token.label}</span>
+                    <b>{toAr(col.count)}</b>
                   </Link>
                 );
               })}
-            </div>
+            </>
           )}
-        </Sider>
+        </div>
+      </nav>
 
-        <Content style={{ display: 'flex', flexDirection: 'column', minHeight: 0, minWidth: 0 }}>
-          <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
-            {children}
+      <div className="shell">
+        <header className="shell-header">
+          <span style={{ fontSize: 14.5, fontWeight: 600, color: c.inkStrong, whiteSpace: 'nowrap' }}>
+            {TITLES[active] ?? 'داشبۆرد'}
+          </span>
+
+          <div style={{ flex: 1, display: 'flex', justifyContent: 'center', minWidth: 0 }}>
+            <CommandPalette
+              commands={[...WORK_NAV, ...DATA_NAV, ...ADMIN_NAV]
+                .filter((i) => !i.requires || can(i.requires))
+                .map((i) => ({ key: i.key, label: i.label, icon: i.icon }))}
+            />
           </div>
 
-          {/* Status bar — corpus scale and session facts, as in the comps. */}
-          <footer
-            style={{
-              flex: 'none', height: 26, display: 'flex', alignItems: 'center', gap: 14,
-              paddingInline: 16, background: c.emeraldDeep, color: 'rgba(255,255,255,.75)',
-              fontSize: 13,
+          {/* Part of the design, but disabled: there are no translations yet,
+              and a control that silently does nothing is worse than an honest
+              one. */}
+          <Tooltip title="لە ئێستادا تەنها کوردی بەردەستە">
+            <Segmented
+              size="small"
+              value="ku"
+              disabled
+              options={[
+                { value: 'ku', label: 'کوردی' },
+                { value: 'ar', label: 'ع' },
+                { value: 'en', label: 'EN' },
+              ]}
+            />
+          </Tooltip>
+
+          <Tooltip title="داتای حەدیس ڕاستەقینەیە؛ دۆخی کار نموونەییە و کاریگەری لەسەر ماڵپەڕی گشتی نییە">
+            <Tag color="warning" style={{ marginInlineEnd: 0 }}>نموونە</Tag>
+          </Tooltip>
+
+          <Tooltip title="ماڵپەڕی گشتی">
+            <a
+              href={SITE_URL}
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: c.inkFaint, display: 'grid', placeItems: 'center', fontSize: 15 }}
+            >
+              <ExportOutlined />
+            </a>
+          </Tooltip>
+
+          <Dropdown
+            trigger={['click']}
+            menu={{
+              items: [
+                {
+                  key: 'who',
+                  disabled: true,
+                  label: (
+                    <div style={{ paddingBlock: 4 }}>
+                      <div style={{ fontSize: 13, fontWeight: 600, color: c.ink }}>{user.name}</div>
+                      <div dir="ltr" style={{ fontSize: 11.5, color: c.inkGhost, textAlign: 'start' }}>
+                        {user.email}
+                      </div>
+                    </div>
+                  ),
+                },
+                { type: 'divider' },
+                {
+                  key: 'role',
+                  disabled: true,
+                  icon: <SafetyOutlined />,
+                  label: <span style={{ fontSize: 12.5 }}>{ROLE_LABEL[user.role] ?? user.role}</span>,
+                },
+                { type: 'divider' },
+                { key: 'logout', icon: <LogoutOutlined />, label: 'دەرچوون', onClick: logout },
+              ],
             }}
           >
-            <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#6fce9f' }} />
-              هەموو شت پاشەکەوتکراوە
-            </span>
-            {corpus?.hadiths != null && (
-              <span>
-                {toAr(corpus.hadiths.toLocaleString('en'))} حەدیس ·{' '}
-                {toAr((corpus.books ?? 0).toLocaleString('en'))} پەرتووک ·{' '}
-                {toAr((corpus.narrators ?? 0).toLocaleString('en'))} ڕاوی
+            <button
+              style={{
+                display: 'flex', alignItems: 'center', gap: 9, height: 40, padding: '0 4px',
+                background: 'transparent', border: 'none', borderRadius: 8, cursor: 'pointer',
+                fontFamily: 'inherit', lineHeight: 1.3,
+              }}
+            >
+              <span style={{ textAlign: 'start' }}>
+                <span style={{ display: 'block', fontSize: 12.5, fontWeight: 600, color: c.ink }}>
+                  {user.name}
+                </span>
+                <span style={{ display: 'block', fontSize: 11, color: c.inkGhost }}>
+                  {ROLE_LABEL[user.role] ?? user.role}
+                </span>
               </span>
-            )}
-            <span style={{ marginInlineStart: 'auto' }}>کوردی (سۆرانی) · RTL</span>
-          </footer>
-        </Content>
-      </Layout>
-    </Layout>
-  );
-}
+              <Avatar
+                size={32}
+                style={{ background: tone.bg, color: tone.fg, fontSize: 12, fontWeight: 600 }}
+              >
+                {initials(user.name)}
+              </Avatar>
+            </button>
+          </Dropdown>
+        </header>
 
-function GroupLabel({ children }: { children: ReactNode }) {
-  return (
-    <span style={{ fontSize: 13, fontWeight: 700, color: c.inkGhost, letterSpacing: '.3px' }}>
-      {children}
-    </span>
+        <div className="shell-body">{children}</div>
+
+        <footer className="shell-status">
+          <span style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#6fce9f' }} />
+            هەموو شت پاشەکەوتکراوە
+          </span>
+          {corpus?.hadiths != null && (
+            <span>
+              {toAr(corpus.hadiths.toLocaleString('en'))} حەدیس ·{' '}
+              {toAr((corpus.books ?? 0).toLocaleString('en'))} پەرتووک ·{' '}
+              {toAr((corpus.narrators ?? 0).toLocaleString('en'))} ڕاوی
+            </span>
+          )}
+          <span style={{ marginInlineStart: 'auto' }}>کوردی (سۆرانی) · RTL</span>
+        </footer>
+      </div>
+    </>
   );
 }

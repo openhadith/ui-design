@@ -11,7 +11,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { CheckOutlined, DeleteOutlined, ReloadOutlined, WarningFilled } from '@ant-design/icons';
 import { useStudio } from './StudioContext';
 import { useToast } from './useToast';
-import { c, ISSUE, toAr } from '@/lib/tokens';
+import { c, ISSUE, toAr, shell } from '@/lib/tokens';
 
 const { Text, Title } = Typography;
 
@@ -114,7 +114,7 @@ export default function QualityView({
         <div
           style={{
             flex: 'none', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 12,
-            borderBottom: `1px solid ${c.lineStrong}`, flexWrap: 'wrap',
+            borderBottom: `1px solid ${shell.cardBorder}`, flexWrap: 'wrap',
           }}
         >
           <Title level={4} style={{ margin: 0 }}>جۆری داتا</Title>
@@ -135,7 +135,7 @@ export default function QualityView({
           </Space>
         </div>
 
-        <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 20px 40px' }}>
+        <div className="surface">
           {/* One headline number. */}
           <Card size="small" style={{ marginBottom: 14 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 28, flexWrap: 'wrap' }}>
@@ -217,12 +217,7 @@ export default function QualityView({
         </div>
       </div>
 
-      <aside
-        style={{
-          width: 290, flex: 'none', background: c.nav, borderInlineEnd: `1px solid ${c.lineNav}`,
-          overflowY: 'auto', padding: 14, display: 'flex', flexDirection: 'column', gap: 12,
-        }}
-      >
+      <aside className="side-rail">
         <Card size="small" title="کێشە بەپێی پەرتووک">
           {byBook.map((b) => (
             <div key={b.book} style={{ marginBottom: 8 }}>

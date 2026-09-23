@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 import { useStudio } from './StudioContext';
 import { useToast } from './useToast';
-import { agoKu, avatarOf, c, GRADE, initials, ISSUE, STATUS, toAr } from '@/lib/tokens';
+import { agoKu, avatarOf, c, GRADE, initials, ISSUE, STATUS, toAr, shell } from '@/lib/tokens';
 
 const { Text } = Typography;
 
@@ -262,7 +262,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
         <div
           style={{
             flex: 'none', padding: '14px 20px 10px', display: 'flex', flexDirection: 'column',
-            gap: 10, borderBottom: `1px solid ${c.lineStrong}`,
+            gap: 10, borderBottom: `1px solid ${shell.cardBorder}`,
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
@@ -394,7 +394,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
         <div
           style={{
             flex: 'none', display: 'flex', alignItems: 'center', gap: 14, padding: '7px 20px',
-            background: c.bar, borderTop: `1px solid ${c.lineStrong}`,
+            background: shell.card, borderTop: `1px solid ${shell.cardBorder}`,
             fontSize: 13, color: c.inkFaint,
           }}
         >
@@ -405,12 +405,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
         </div>
       </div>
 
-      <aside
-        style={{
-          width: 232, flex: 'none', background: c.nav, borderInlineEnd: `1px solid ${c.lineNav}`,
-          overflowY: 'auto', padding: 14, display: 'flex', flexDirection: 'column', gap: 12,
-        }}
-      >
+      <aside className="side-rail">
         <Card title="دیمەنە پاشەکەوتکراوەکان" size="small" styles={{ body: { padding: 6 } }}>
           {savedViews.map((v) => (
             <Button

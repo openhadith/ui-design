@@ -30,7 +30,7 @@ export default function StatsView({ data }: { data: StatsData }) {
   const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : 0);
 
   return (
-    <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 20px 40px' }}>
+    <div className="surface">
       <Title level={4} style={{ margin: '0 0 4px' }}>ئامار</Title>
       <Text type="secondary" style={{ fontSize: 14 }}>
         چالاکی پشتڕاستکردنەوە و پێشکەوتنی تیمەکان — ئەم ژمارانە تەنها لێرەن و لە ماڵپەڕی گشتیدا نین.

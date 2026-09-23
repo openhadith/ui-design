@@ -7,7 +7,7 @@ import {
 import { ReloadOutlined, RollbackOutlined } from '@ant-design/icons';
 import { useStudio } from './StudioContext';
 import { useToast } from './useToast';
-import { agoKu, avatarOf, c, initials, toAr } from '@/lib/tokens';
+import { agoKu, avatarOf, c, initials, toAr, shell } from '@/lib/tokens';
 
 const { Text, Title } = Typography;
 
@@ -102,7 +102,7 @@ export default function AuditView() {
       <div
         style={{
           flex: 'none', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 12,
-          borderBottom: `1px solid ${c.lineStrong}`, flexWrap: 'wrap',
+          borderBottom: `1px solid ${shell.cardBorder}`, flexWrap: 'wrap',
         }}
       >
         <Title level={4} style={{ margin: 0 }}>تۆماری کردار</Title>
@@ -120,7 +120,7 @@ export default function AuditView() {
         </Space>
       </div>
 
-      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 20px 40px' }}>
+      <div className="surface">
         {loading ? (
           <div style={{ textAlign: 'center', padding: 40 }}><Spin /></div>
         ) : rows.length === 0 ? (

@@ -18,7 +18,7 @@ import type { EditableLink } from '@/lib/isnad';
 import IsnadEditor from './IsnadEditor';
 import { publicHadithUrl } from '@/lib/site';
 import { gradeKeyOf, hukmLabel } from '@/lib/corpus';
-import { agoKu, avatarOf, c, GRADE, initials, ISSUE, STATUS, toAr, type Token } from '@/lib/tokens';
+import { agoKu, avatarOf, c, GRADE, initials, ISSUE, STATUS, toAr, type Token, shell } from '@/lib/tokens';
 
 const { Text } = Typography;
 
@@ -129,8 +129,8 @@ export default function WorkstationView({
         {/* record header */}
         <div
           style={{
-            flex: 'none', padding: '10px 20px', background: c.bar,
-            borderBottom: `1px solid ${c.lineStrong}`,
+            flex: 'none', padding: '10px 20px', background: shell.card,
+            borderBottom: `1px solid ${shell.cardBorder}`,
             display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
           }}
         >
@@ -279,7 +279,7 @@ export default function WorkstationView({
         <div
           style={{
             flex: 'none', display: 'flex', alignItems: 'center', gap: 8, padding: '10px 20px',
-            background: c.bar, borderTop: `1px solid ${c.lineStrong}`, flexWrap: 'wrap',
+            background: shell.card, borderTop: `1px solid ${shell.cardBorder}`, flexWrap: 'wrap',
           }}
         >
           <Input
@@ -331,12 +331,7 @@ export default function WorkstationView({
       )}
 
       {/* inspector */}
-      <aside
-        style={{
-          width: 300, flex: 'none', background: c.nav, borderInlineEnd: `1px solid ${c.lineNav}`,
-          overflowY: 'auto', padding: 14, display: 'flex', flexDirection: 'column', gap: 12,
-        }}
-      >
+      <aside className="side-rail">
         <Card size="small" title="دۆخی کار">
           <Descriptions
             size="small"

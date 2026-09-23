@@ -10,7 +10,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import type { CorpusHadith } from '@/lib/corpus';
 import type { EditableLink } from '@/lib/isnad';
 import { gradeKeyOf, hukmLabel } from '@/lib/corpus';
-import { c, GRADE, toAr } from '@/lib/tokens';
+import { c, GRADE, toAr, shell } from '@/lib/tokens';
 
 const { Text, Title } = Typography;
 const AMIRI = { fontFamily: 'var(--font-amiri), serif' } as const;
@@ -56,7 +56,7 @@ export default function SanadView({
         <div
           style={{
             flex: 'none', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 12,
-            borderBottom: `1px solid ${c.lineStrong}`, flexWrap: 'wrap',
+            borderBottom: `1px solid ${shell.cardBorder}`, flexWrap: 'wrap',
           }}
         >
           <Title level={4} style={{ margin: 0 }}>پشکنینی سەنەد</Title>
@@ -84,7 +84,7 @@ export default function SanadView({
           </Space.Compact>
         </div>
 
-        <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '18px 20px 40px' }}>
+        <div className="surface">
           {!hadith ? (
             <Empty description="ژمارەیەکی حەدیس بنووسە بۆ پیشاندانی زنجیرەکەی" />
           ) : (
@@ -174,12 +174,7 @@ export default function SanadView({
         </div>
       </div>
 
-      <aside
-        style={{
-          width: 310, flex: 'none', background: c.nav, borderInlineEnd: `1px solid ${c.lineNav}`,
-          overflowY: 'auto', padding: 14, display: 'flex', flexDirection: 'column', gap: 12,
-        }}
-      >
+      <aside className="side-rail">
         {selected ? (
           <Card size="small" title="ڕاوی هەڵبژێردراو"
             extra={<Link href={`/narrator/${selected.rawyId}`} style={{ fontSize: 13.5 }}>پرۆفایل</Link>}>

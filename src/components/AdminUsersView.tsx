@@ -297,12 +297,7 @@ export default function AdminUsersView({
         />
       </div>
 
-      <aside
-        style={{
-          width: 300, flex: 'none', background: c.nav, borderInlineEnd: `1px solid ${c.lineNav}`,
-          overflowY: 'auto', padding: 14, display: 'flex', flexDirection: 'column', gap: 12,
-        }}
-      >
+      <aside className="side-rail">
         {team && (
           <>
             <div>

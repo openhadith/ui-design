@@ -11,7 +11,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { SwapOutlined } from '@ant-design/icons';
 import { useStudio } from './StudioContext';
 import { useToast } from './useToast';
-import { avatarOf, c, initials, ROLE_LABEL, toAr } from '@/lib/tokens';
+import { avatarOf, c, initials, ROLE_LABEL, toAr, shell } from '@/lib/tokens';
 
 const { Text, Title } = Typography;
 
@@ -156,7 +156,7 @@ export default function AssignmentsView({
         <div
           style={{
             flex: 'none', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 12,
-            borderBottom: `1px solid ${c.lineStrong}`, flexWrap: 'wrap',
+            borderBottom: `1px solid ${shell.cardBorder}`, flexWrap: 'wrap',
           }}
         >
           <Title level={4} style={{ margin: 0 }}>دابەشکردن</Title>
@@ -206,7 +206,7 @@ export default function AssignmentsView({
           </Space>
         </div>
 
-        <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 20px 40px' }}>
+        <div className="surface">
           <Card size="small" styles={{ body: { padding: 0 } }}
             title={view === 'people' ? 'بارکاری ئەندامان' : 'بارکاری بەپێی پەرتووک'}>
             {view === 'people' ? (
@@ -218,12 +218,7 @@ export default function AssignmentsView({
         </div>
       </div>
 
-      <aside
-        style={{
-          width: 280, flex: 'none', background: c.nav, borderInlineEnd: `1px solid ${c.lineNav}`,
-          overflowY: 'auto', padding: 14, display: 'flex', flexDirection: 'column', gap: 12,
-        }}
-      >
+      <aside className="side-rail">
         <Card size="small" title="کورتە">
           <Descriptions
             size="small"

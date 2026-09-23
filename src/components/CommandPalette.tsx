@@ -6,7 +6,7 @@ import { Empty, Input, Modal, Spin, Typography, type InputRef } from 'antd';
 import {
   BookOutlined, EnterOutlined, ReadOutlined, SearchOutlined, UserOutlined,
 } from '@ant-design/icons';
-import { c, toAr } from '@/lib/tokens';
+import { c, toAr, shell } from '@/lib/tokens';
 
 const { Text } = Typography;
 const AMIRI = { fontFamily: 'var(--font-amiri), serif' } as const;
@@ -242,7 +242,7 @@ export default function CommandPalette({ commands }: { commands: PaletteCommand[
         <div
           style={{
             display: 'flex', gap: 14, padding: '7px 14px', borderTop: `1px solid ${c.lineSoft}`,
-            background: c.bar, fontSize: 13, color: c.inkFaint, borderRadius: '0 0 11px 11px',
+            background: shell.card, fontSize: 13, color: c.inkFaint, borderRadius: '0 0 11px 11px',
           }}
         >
           <span>↑↓ گەڕان</span><span>Enter کردنەوە</span><span>Esc داخستن</span>

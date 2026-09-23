@@ -1,78 +1,516 @@
 /*
- * Base styles for the dashboard.
+ * Dashboard shell.
  *
- * Deliberately small: Ant Design supplies component styling and its own reset,
- * and `src/lib/theme.ts` maps its tokens onto the design palette. Only the
- * things AntD does not own live here.
+ * Every positional property is LOGICAL (inset-inline-start, padding-inline,
+ * border-inline) because this dashboard runs RTL for Kurdish; the whole frame
+ * mirrors from these rules alone.
+ *
+ * Ant Design supplies the components and `src/lib/theme.ts` maps its tokens
+ * onto the brand palette. What lives here is the furniture AntD does not own:
+ * the rail, the header, the working surface, cards and stat tiles.
  */
 
 :root {
-  /* Surfaces, from design/*.dc.html — kept in sync with src/lib/tokens.ts */
-  --paper: #e7e3da;
-  --raised: #fffdf8;
-  --ink: #2b2925;
+  --rail-w: 232px;
+  --rail-w-collapsed: 64px;
+
+  --canvas: #fffdf9;
+  --card: #ffffff;
+  --card-border: #efeae0;
+  --card-border-soft: #f5f2ec;
+  --sunken: #faf8f3;
+
+  --ink: #221f1a;
+  --ink-muted: #5c564a;
+  --ink-faint: #8a8272;
+  --ink-ghost: #a89f8c;
+
   --emerald: #2f6f5b;
+  --gold: #c79a3a;
+
+  --shadow-sm: 0 1px 3px rgba(35, 30, 20, 0.05);
+  --shadow-md: 0 2px 10px rgba(35, 30, 20, 0.08);
 }
 
-* {
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 html,
 body {
-  margin: 0;
-  padding: 0;
   height: 100%;
 }
 
 body {
-  background: var(--paper);
+  background: var(--canvas);
   color: var(--ink);
-  /* Same stack and rhythm as the public reading site. */
+  /* The public reading site's family, so the two applications read as one
+     product. Plex covers Latin and Arabic alike, which matters when Kurdish
+     chrome carries numerals. */
   font-family: var(--font-plex-arabic), 'Noto Sans Arabic', system-ui, sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 14px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  /* The dashboard is an app shell that owns the viewport; only its centre
-     pane scrolls. */
+  -moz-osx-font-smoothing: grayscale;
+  /* An app shell owns the viewport; only the working surface scrolls. */
   overflow: hidden;
 }
 
-/* The comps' quieter scrollbars — a dense workstation with default macOS
-   scrollbars reads noisier than it should. */
+/* Links: emerald and unadorned. Structural links — a whole row, a tile, a nav
+   item — opt out with .plain and keep the surrounding ink. */
+a {
+  color: var(--emerald);
+  text-decoration: none;
+}
+a:hover {
+  color: #235445;
+}
+a.plain,
+a.plain:hover {
+  color: inherit;
+}
+
 ::-webkit-scrollbar {
-  width: 11px;
-  height: 11px;
-}
-::-webkit-scrollbar-thumb {
-  background: #cfc9bc;
-  border-radius: 6px;
-  border: 3px solid transparent;
-  background-clip: content-box;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #b6afa0;
-  background-clip: content-box;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+::-webkit-scrollbar-thumb {
+  background-color: rgba(34, 31, 26, 0.16);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(34, 31, 26, 0.28);
+}
+
+/* ==========================================================================
+   Rail — dark, fixed, with a gold thumb on the active row
+   ========================================================================== */
+
+.rail {
+  position: fixed;
+  inset-inline-start: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  width: var(--rail-w);
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #17211d 0%, #121a17 100%);
+  border-inline-end: 1px solid #24302b;
+  overflow: hidden;
+}
+
+.rail-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  height: 56px;
+  flex: none;
+  padding-inline: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #fff;
+  text-decoration: none;
+}
+
+.rail-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  background: var(--emerald);
+  color: #fff;
+  font-family: var(--font-amiri), serif;
+  font-weight: 700;
+  font-size: 19px;
+}
+
+.rail-wordmark {
+  min-width: 0;
+  line-height: 1.2;
+}
+.rail-wordmark b {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+.rail-wordmark span {
+  display: block;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.42);
+  white-space: nowrap;
+}
+
+.rail-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-block: 6px 14px;
+}
+.rail-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.14);
+}
+
+.rail-group {
+  padding: 14px 20px 5px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.36);
+  white-space: nowrap;
+}
+
+.rail-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 42px;
+  padding-inline: 17px 12px;
+  border: 0;
+  border-inline-start: 3px solid transparent;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.52);
+  font-family: inherit;
+  font-size: 13.5px;
+  text-align: start;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.rail-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.82);
+}
+.rail-item:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+}
+.rail-item.is-active {
+  background: rgba(255, 255, 255, 0.06);
+  border-inline-start-color: var(--gold);
+  color: #fff;
+  font-weight: 500;
+}
+
+.rail-item .anticon {
+  font-size: 15px;
+  flex: none;
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.13s ease;
+}
+.rail-item:hover .anticon {
+  color: #fff;
+}
+.rail-item.is-active .anticon {
+  color: var(--gold);
+}
+
+.rail-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Count on a nav row — a quiet chip, not an alarm. */
+.rail-count {
+  flex: none;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.72);
+}
+.rail-item.is-active .rail-count {
+  background: rgba(199, 154, 58, 0.22);
+  color: #e8c98a;
+}
+
+/* Smart collections: a dot, a label, a count. */
+.rail-collection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 20px;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 12.5px;
+  text-decoration: none;
+  transition: color 0.13s ease;
+}
+.rail-collection:hover {
+  color: rgba(255, 255, 255, 0.82);
+}
+.rail-collection i {
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  flex: none;
+}
+.rail-collection span {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rail-collection b {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+/* ==========================================================================
+   Shell — sticky header over an edge-to-edge working surface
+   ========================================================================== */
+
+.shell {
+  height: 100%;
+  margin-inline-start: var(--rail-w);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.shell-header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 56px;
+  padding-inline: 20px;
+  background: var(--card);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.shell-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  min-width: 0;
+}
+
+/* The scrolling working surface. */
+.surface {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 18px 20px 28px;
+  background: var(--canvas);
+}
+
+/* A secondary column beside the surface (activity, inspectors). */
+.side-rail {
+  width: 320px;
+  flex: none;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 18px 16px 28px;
+  background: var(--sunken);
+  border-inline-end: 1px solid var(--card-border);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.shell-status {
+  flex: none;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-inline: 20px;
+  background: #17211d;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 11.5px;
+}
+
+/* ==========================================================================
+   Page furniture
+   ========================================================================== */
+
+.page-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.page-title {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.page-sub {
+  margin: 3px 0 0;
+  font-size: 13px;
+  color: var(--ink-faint);
+}
+.page-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+.card + .card {
+  margin-top: 14px;
+}
+.card-pad {
+  padding: 16px 18px;
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--card-border-soft);
+}
+.card-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.card-extra {
+  margin-inline-start: auto;
+  font-size: 12.5px;
+  color: var(--ink-faint);
+}
+/* Tables sit edge to edge inside a card. */
+.card .ant-table-wrapper {
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Stat tiles
+   ========================================================================== */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(178px, 100%), 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stat-tile {
+  display: block;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 15px 17px;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+.stat-tile:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+  border-color: #e5ddcd;
+}
+.stat-tile-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.stat-tile-label {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink-faint);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+.stat-tile-value {
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.stat-tile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+}
+.stat-tile-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 8px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+.stat-tile-trend.up {
+  color: #2f6f5b;
+  background: #e9f2ec;
+}
+.stat-tile-trend.down {
+  color: #a8412a;
+  background: #f7ece9;
+}
+.stat-tile-trend.flat {
+  color: var(--ink-faint);
+  background: #f2efe7;
+}
+.stat-tile-hint {
+  margin-top: 5px;
+  font-size: 11.5px;
+  color: var(--ink-ghost);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Misc
+   ========================================================================== */
 
 /* Keyboard cursor row in the validation queue. The queue is driven by ↑↓ as
    much as by the mouse, so the focused row needs a marker that survives AntD's
    own hover and selection backgrounds. */
 .studio-row-cursor > td {
-  background: #f2efe7 !important;
+  background: var(--sunken) !important;
   box-shadow: inset 3px 0 0 0 var(--emerald);
 }
 
-@keyframes omFade {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+/* Arabic text — matn, narrator names — is set in Amiri throughout. */
+.matn {
+  font-family: var(--font-amiri), serif;
+  line-height: 1.9;
+}
+
+.clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

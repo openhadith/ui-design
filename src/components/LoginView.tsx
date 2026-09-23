@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import {
   Alert, App, Avatar, Button, Card, Divider, Form, Input, Tag, Typography,
 } from 'antd';
-import { avatarOf, c, initials, PERMISSION_LABEL, ROLE_LABEL } from '@/lib/tokens';
+import { avatarOf, c, initials, PERMISSION_LABEL, ROLE_LABEL, shell } from '@/lib/tokens';
 
 const { Title, Text } = Typography;
 
@@ -88,7 +88,7 @@ export default function LoginView({
     <div
       style={{
         position: 'fixed', inset: 0, display: 'flex', alignItems: 'center',
-        justifyContent: 'center', padding: 24, background: c.page, overflowY: 'auto',
+        justifyContent: 'center', padding: 24, background: shell.canvas, overflowY: 'auto',
       }}
     >
       <div style={{ width: '100%', maxWidth: 880, display: 'flex', flexDirection: 'column', gap: 18 }}>

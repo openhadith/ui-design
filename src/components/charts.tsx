@@ -4,7 +4,7 @@ import { useState, type ReactNode } from 'react';
 import { Card, Empty, Segmented, Table, Tooltip, Typography } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { BarChartOutlined, TableOutlined } from '@ant-design/icons';
-import { c, toAr } from '@/lib/tokens';
+import { c, toAr, shell } from '@/lib/tokens';
 
 /**
  * Minimal chart kit for the studio.
@@ -208,7 +208,7 @@ export function ColumnChart({ points, height = 150 }: { points: ColumnPoint[]; h
           );
         })}
       </div>
-      <div style={{ borderTop: `1px solid ${c.lineStrong}`, display: 'flex' }}>
+      <div style={{ borderTop: `1px solid ${shell.cardBorder}`, display: 'flex' }}>
         {points.map((p) => (
           <div key={p.key} style={{ flex: 1, textAlign: 'center', paddingTop: 4 }}>
             {p.showLabel && <Text style={{ fontSize: 12, color: c.inkDim, whiteSpace: 'nowrap' }}>{p.label}</Text>}

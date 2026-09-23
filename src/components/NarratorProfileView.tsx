@@ -39,7 +39,7 @@ export default function NarratorProfileView({
   ].filter(([, v]) => v) as Array<[string, string]>;
 
   return (
-    <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 20px 40px' }}>
+    <div className="surface">
       <Space style={{ marginBottom: 14, width: '100%' }} wrap>
         <Link href="/narrators">
           <Button size="small" type="text" icon={<ArrowRightOutlined />}>ڕاویان</Button>
