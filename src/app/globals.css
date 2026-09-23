@@ -28,7 +28,10 @@ body {
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-outfit), var(--font-plex-arabic), 'Noto Sans Arabic', system-ui, sans-serif;
+  /* Same stack and rhythm as the public reading site. */
+  font-family: var(--font-plex-arabic), 'Noto Sans Arabic', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   /* The dashboard is an app shell that owns the viewport; only its centre
      pane scrolls. */

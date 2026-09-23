@@ -132,7 +132,7 @@ export default function AuditView() {
               size="small"
               style={{ marginBottom: 14 }}
               title={<span dir="ltr" style={{ unicodeBidi: 'isolate' }}>{day}</span>}
-              extra={<Text type="secondary" style={{ fontSize: 11 }}>{toAr(entries.length)} کردار</Text>}
+              extra={<Text type="secondary" style={{ fontSize: 13 }}>{toAr(entries.length)} کردار</Text>}
             >
               <Timeline
                 items={entries.map((e) => {
@@ -140,26 +140,26 @@ export default function AuditView() {
                   const reversible = REVERSIBLE.test(e.action) && !!e.before && !e.reverted;
                   return {
                     icon: (
-                      <Avatar size={24} style={{ background: tone.bg, color: tone.fg, fontSize: 9.5, fontWeight: 600 }}>
+                      <Avatar size={24} style={{ background: tone.bg, color: tone.fg, fontSize: 12, fontWeight: 600 }}>
                         {initials(e.actor_name)}
                       </Avatar>
                     ),
                     content: (
                       <div style={{ opacity: e.reverted ? 0.55 : 1, marginTop: -2 }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                          <Text strong style={{ fontSize: 12.5 }}>{e.actor_name ?? 'سیستەم'}</Text>
+                          <Text strong style={{ fontSize: 14.5 }}>{e.actor_name ?? 'سیستەم'}</Text>
                           <Tag color={actionColor(e.action)} style={{ marginInlineEnd: 0 }}>
                             {ACTION_LABEL[e.action] ?? e.action}
                           </Tag>
                           {e.entity_id && (
-                            <Text style={{ fontSize: 11, color: c.inkGhost }}>
+                            <Text style={{ fontSize: 13, color: c.inkGhost }}>
                               <span dir="ltr" style={{ unicodeBidi: 'isolate' }}>
                                 {ENTITY_PREFIX[e.entity_type ?? ''] ?? 'REC'}-{e.entity_id}
                               </span>
                             </Text>
                           )}
                           {e.reverted && <Tag color="error">گەڕێندراوەتەوە</Tag>}
-                          <Text style={{ fontSize: 10.5, color: c.inkGhost, marginInlineStart: 'auto' }}>
+                          <Text style={{ fontSize: 13, color: c.inkGhost, marginInlineStart: 'auto' }}>
                             {agoKu(e.created_at)}
                           </Text>
                           {can('admin') && reversible && (
@@ -195,7 +195,7 @@ export default function AuditView() {
                         )}
 
                         {e.reason && (
-                          <div><Text type="secondary" style={{ fontSize: 11 }}>هۆکار: {e.reason}</Text></div>
+                          <div><Text type="secondary" style={{ fontSize: 13 }}>هۆکار: {e.reason}</Text></div>
                         )}
                       </div>
                     ),

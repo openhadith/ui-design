@@ -116,12 +116,12 @@ export default function CompareView({
                 strokeColor={verdict.color}
                 railColor={c.line}
                 format={(p) => (
-                  <span style={{ fontSize: 19, fontWeight: 700, color: verdict.color }}>{toAr(p ?? 0)}٪</span>
+                  <span style={{ fontSize: 21, fontWeight: 700, color: verdict.color }}>{toAr(p ?? 0)}٪</span>
                 )}
               />
               <div style={{ flex: 1, minWidth: 220 }}>
-                <Text strong style={{ fontSize: 13 }}>هاوشێوەیی</Text>
-                <Paragraph type="secondary" style={{ margin: '2px 0 0', fontSize: 11.5 }}>
+                <Text strong style={{ fontSize: 15 }}>هاوشێوەیی</Text>
+                <Paragraph type="secondary" style={{ margin: '2px 0 0', fontSize: 13.5 }}>
                   {verdict.text} بەراورد لەسەر وشەی ڕێکخراو دەکرێت، نەک دەقی خاو — جیاوازی تەشکیل و
                   شێوەی ئەلیف وەک جیاوازی ناژمێردرێت.
                 </Paragraph>
@@ -166,7 +166,7 @@ export default function CompareView({
 
 function DiffText({ ops }: { ops: DiffOp[] }) {
   return (
-    <p dir="rtl" style={{ margin: 0, fontFamily: 'var(--font-amiri), serif', fontSize: 16, lineHeight: 2.1, color: c.inkStrong }}>
+    <p dir="rtl" style={{ margin: 0, fontFamily: 'var(--font-amiri), serif', fontSize: 17, lineHeight: 2.1, color: c.inkStrong }}>
       {ops.map((op, i) => (
         <span
           key={i}

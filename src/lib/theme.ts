@@ -55,31 +55,41 @@ export const studioTheme: ThemeConfig = {
     colorBorderSecondary: c.lineSoft,
     colorSplit: c.lineSoft,
 
-    // --- shape and rhythm
-    // The comps run a dense 12–13px scale; AntD's 14px default makes every
-    // table a row taller and loses one screenful of the queue.
-    fontSize: 13,
-    fontSizeSM: 11.5,
-    fontSizeLG: 15,
-    fontSizeHeading1: 24,
-    fontSizeHeading2: 19,
-    fontSizeHeading3: 16,
-    fontSizeHeading4: 14,
-    fontSizeHeading5: 13,
+    /*
+     * --- shape and rhythm
+     *
+     * Sized to read, not to cram. The comps were drawn at a 12–13px scale that
+     * looks right in a static mockup but is genuinely hard to read in a tool
+     * someone uses all day, so the base follows the public site instead: the
+     * same family, the same 1.7 line-height, one step down from its 16px
+     * because a dashboard carries more chrome per screen than an article does.
+     *
+     * Controls grow with the text — AntD's 32px default control is cramped
+     * around 15px type.
+     */
+    fontSize: 15,
+    fontSizeSM: 13,
+    fontSizeLG: 17,
+    fontSizeHeading1: 30,
+    fontSizeHeading2: 24,
+    fontSizeHeading3: 20,
+    fontSizeHeading4: 17,
+    fontSizeHeading5: 15,
     borderRadius: 8,
     borderRadiusLG: 11,
     borderRadiusSM: 6,
-    controlHeight: 32,
-    controlHeightSM: 27,
+    controlHeight: 38,
+    controlHeightSM: 32,
+    controlHeightLG: 44,
     lineHeight: 1.7,
 
     /**
-     * Outfit carries no Arabic script, so it is first only for Latin text and
-     * numerals; the browser falls back per glyph to Plex Arabic for Kurdish.
-     * Both variables are declared on the studio root in layout.tsx.
+     * The public site's stack, so the two applications read as one product.
+     * IBM Plex Sans Arabic covers Latin and Arabic script alike, which matters
+     * here: the chrome is Kurdish and the numerals sit inside it.
      */
     fontFamily:
-      "var(--font-outfit), var(--font-plex-arabic), 'Noto Sans Arabic', system-ui, sans-serif",
+      "var(--font-plex-arabic), 'Noto Sans Arabic', system-ui, sans-serif",
 
     wireframe: false,
   },
@@ -87,7 +97,7 @@ export const studioTheme: ThemeConfig = {
   components: {
     Layout: {
       headerBg: c.bar,
-      headerHeight: 54,
+      headerHeight: 60,
       headerPadding: '0 16px',
       siderBg: c.nav,
       bodyBg: c.page,
@@ -100,7 +110,7 @@ export const studioTheme: ThemeConfig = {
       itemSelectedColor: c.emerald,
       itemColor: c.inkMuted,
       itemHoverBg: c.sunken,
-      itemHeight: 34,
+      itemHeight: 40,
       itemMarginInline: 8,
       iconSize: 14,
       collapsedIconSize: 15,
@@ -113,13 +123,13 @@ export const studioTheme: ThemeConfig = {
       rowSelectedBg: c.emeraldSoft,
       rowSelectedHoverBg: c.emeraldTint,
       borderColor: c.lineSoft,
-      cellPaddingBlock: 9,
-      cellPaddingInline: 12,
+      cellPaddingBlock: 11,
+      cellPaddingInline: 14,
       footerBg: c.bar,
     },
     Card: {
       headerBg: 'transparent',
-      headerFontSize: 12.5,
+      headerFontSize: 14,
       colorBorderSecondary: c.lineCard,
       paddingLG: 16,
     },
@@ -143,9 +153,9 @@ export const studioTheme: ThemeConfig = {
     },
     Input: { activeShadow: `0 0 0 2px ${c.emerald}1f` },
     Select: { optionSelectedBg: c.emeraldSoft },
-    Modal: { headerBg: c.raised, contentBg: c.raised, titleFontSize: 15 },
+    Modal: { headerBg: c.raised, contentBg: c.raised, titleFontSize: 17 },
     Drawer: { footerPaddingBlock: 12, footerPaddingInline: 16 },
-    Statistic: { titleFontSize: 11.5, contentFontSize: 24 },
+    Statistic: { titleFontSize: 13, contentFontSize: 26 },
     Descriptions: { labelBg: c.sunken, titleMarginBottom: 8 },
     Segmented: {
       itemSelectedBg: c.raised,
@@ -153,7 +163,7 @@ export const studioTheme: ThemeConfig = {
       trackBg: c.sunken,
     },
     Progress: { defaultColor: c.emerald, remainingColor: c.line },
-    Badge: { textFontSize: 10.5 },
+    Badge: { textFontSize: 12 },
     Alert: { withDescriptionPadding: '12px 16px' },
   },
 };

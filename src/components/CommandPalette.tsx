@@ -105,7 +105,7 @@ export default function CommandPalette({ commands }: { commands: PaletteCommand[
       for (const h of hits.hadiths) {
         out.push({
           id: `h-${h.id}`, group: 'حەدیس', icon: <ReadOutlined />,
-          title: <span style={{ ...AMIRI, fontSize: 14 }}>{(h.matn ?? '').slice(0, 90)}</span>,
+          title: <span style={{ ...AMIRI, fontSize: 16 }}>{(h.matn ?? '').slice(0, 90)}</span>,
           hint: <span dir="ltr" style={{ unicodeBidi: 'isolate' }}>HDT-{h.id}</span>,
           href: `/hadith/${h.id}`,
         });
@@ -113,7 +113,7 @@ export default function CommandPalette({ commands }: { commands: PaletteCommand[
       for (const n of hits.narrators) {
         out.push({
           id: `n-${n.id}`, group: 'ڕاوی', icon: <UserOutlined />,
-          title: <span style={{ ...AMIRI, fontSize: 14 }}>{n.shohra || n.name}</span>,
+          title: <span style={{ ...AMIRI, fontSize: 16 }}>{n.shohra || n.name}</span>,
           hint: n.deathdate ? `ت ${toAr(n.deathdate)}` : undefined,
           href: `/narrator/${n.id}`,
         });
@@ -121,7 +121,7 @@ export default function CommandPalette({ commands }: { commands: PaletteCommand[
       for (const b of hits.books) {
         out.push({
           id: `b-${b.id}`, group: 'پەرتووک', icon: <BookOutlined />,
-          title: <span style={{ ...AMIRI, fontSize: 14 }}>{b.title}</span>,
+          title: <span style={{ ...AMIRI, fontSize: 16 }}>{b.title}</span>,
           hint: b.author_name,
           href: `/books?q=${encodeURIComponent(b.title ?? '')}`,
         });
@@ -154,9 +154,9 @@ export default function CommandPalette({ commands }: { commands: PaletteCommand[
       <button
         onClick={() => setOpen(true)}
         style={{
-          width: 'min(460px, 100%)', height: 34, display: 'flex', alignItems: 'center', gap: 10,
+          width: 'min(520px, 100%)', height: 38, display: 'flex', alignItems: 'center', gap: 10,
           padding: '0 12px', background: c.raised, border: `1px solid ${c.lineNav}`, borderRadius: 8,
-          color: c.inkDim, fontSize: 12.5, fontFamily: 'inherit', cursor: 'pointer',
+          color: c.inkDim, fontSize: 14.5, fontFamily: 'inherit', cursor: 'pointer',
           // AntD's Layout.Header sets line-height to the full header height;
           // without this the kbd badge inherits 54px and grows into a column.
           lineHeight: 1.4,
@@ -167,7 +167,7 @@ export default function CommandPalette({ commands }: { commands: PaletteCommand[
         <kbd
           dir="ltr"
           style={{
-            fontSize: 10, padding: '2px 6px', border: `1px solid ${c.line}`, borderRadius: 4,
+            fontSize: 12.5, padding: '2px 6px', border: `1px solid ${c.line}`, borderRadius: 4,
             background: c.sunken, fontFamily: 'inherit',
           }}
         >
@@ -212,7 +212,7 @@ export default function CommandPalette({ commands }: { commands: PaletteCommand[
               return (
                 <div key={it.id}>
                   {header && (
-                    <div style={{ padding: '8px 10px 4px', fontSize: 10.5, fontWeight: 700, color: c.inkGhost }}>
+                    <div style={{ padding: '8px 10px 4px', fontSize: 13, fontWeight: 700, color: c.inkGhost }}>
                       {header}
                     </div>
                   )}
@@ -230,8 +230,8 @@ export default function CommandPalette({ commands }: { commands: PaletteCommand[
                     <span style={{ flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: c.ink }}>
                       {it.title}
                     </span>
-                    {it.hint && <Text type="secondary" style={{ fontSize: 11, flex: 'none' }}>{it.hint}</Text>}
-                    {active && <EnterOutlined style={{ color: c.emerald, fontSize: 11 }} />}
+                    {it.hint && <Text type="secondary" style={{ fontSize: 13, flex: 'none' }}>{it.hint}</Text>}
+                    {active && <EnterOutlined style={{ color: c.emerald, fontSize: 13 }} />}
                   </div>
                 </div>
               );
@@ -242,7 +242,7 @@ export default function CommandPalette({ commands }: { commands: PaletteCommand[
         <div
           style={{
             display: 'flex', gap: 14, padding: '7px 14px', borderTop: `1px solid ${c.lineSoft}`,
-            background: c.bar, fontSize: 10.5, color: c.inkFaint, borderRadius: '0 0 11px 11px',
+            background: c.bar, fontSize: 13, color: c.inkFaint, borderRadius: '0 0 11px 11px',
           }}
         >
           <span>↑↓ گەڕان</span><span>Enter کردنەوە</span><span>Esc داخستن</span>

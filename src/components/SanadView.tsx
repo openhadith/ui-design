@@ -61,7 +61,7 @@ export default function SanadView({
         >
           <Title level={4} style={{ margin: 0 }}>پشکنینی سەنەد</Title>
           {id && (
-            <Text type="secondary" style={{ fontSize: 11.5 }}>
+            <Text type="secondary" style={{ fontSize: 13.5 }}>
               <span dir="ltr" style={{ unicodeBidi: 'isolate' }}>HDT-{id}</span>
             </Text>
           )}
@@ -90,9 +90,9 @@ export default function SanadView({
           ) : (
             <>
               <Card size="small" title="دەقی حەدیس" style={{ marginBottom: 16 }}>
-                <div dir="rtl" style={{ ...AMIRI, fontSize: 17, lineHeight: 2 }}>{hadith.matn ?? '—'}</div>
+                <div dir="rtl" style={{ ...AMIRI, fontSize: 18, lineHeight: 2 }}>{hadith.matn ?? '—'}</div>
                 {hadith.book?.title && (
-                  <Text type="secondary" style={{ fontSize: 11.5 }}>
+                  <Text type="secondary" style={{ fontSize: 13.5 }}>
                     {hadith.book.title}{hadith.hadithid ? ` · ژمارە ${toAr(hadith.hadithid)}` : ''}
                   </Text>
                 )}
@@ -107,7 +107,7 @@ export default function SanadView({
                   extra={
                     <Space size={6}>
                       {chainEdited && <Tag color="warning" style={{ marginInlineEnd: 0 }}>دەستکاریکراو</Tag>}
-                      {id && <Link href={`/hadith/${id}`} style={{ fontSize: 11.5 }}>دەستکاری زنجیرە</Link>}
+                      {id && <Link href={`/hadith/${id}`} style={{ fontSize: 13.5 }}>دەستکاری زنجیرە</Link>}
                     </Space>
                   }
                 >
@@ -138,7 +138,7 @@ export default function SanadView({
                             }}
                           >
                             <Space size={6} wrap>
-                              <Text strong style={{ ...AMIRI, fontSize: 16, color: isFocus ? c.emerald : c.inkStrong }}>
+                              <Text strong style={{ ...AMIRI, fontSize: 17, color: isFocus ? c.emerald : c.inkStrong }}>
                                 {link.rawy?.Shohra || link.rawy?.Name}
                               </Text>
                               {i === 0 && <Tag color="success">سەرچاوە</Tag>}
@@ -155,12 +155,12 @@ export default function SanadView({
                         ),
                         content: (
                           <>
-                            <Text type="secondary" style={{ fontSize: 11 }}>
+                            <Text type="secondary" style={{ fontSize: 13 }}>
                               {b?.rutba_description ?? ''}
                               {link.rawy?.DeathYear ? ` · ت ${toAr(link.rawy.DeathYear)}` : ''}
                             </Text>
                             {link.flagged && link.note && (
-                              <div><Text style={{ fontSize: 11, color: c.rust }}>{link.note}</Text></div>
+                              <div><Text style={{ fontSize: 13, color: c.rust }}>{link.note}</Text></div>
                             )}
                           </>
                         ),
@@ -182,8 +182,8 @@ export default function SanadView({
       >
         {selected ? (
           <Card size="small" title="ڕاوی هەڵبژێردراو"
-            extra={<Link href={`/narrator/${selected.rawyId}`} style={{ fontSize: 11.5 }}>پرۆفایل</Link>}>
-            <div style={{ ...AMIRI, fontSize: 16, marginBottom: 8 }}>{selected.rawy?.Shohra || selected.rawy?.Name}</div>
+            extra={<Link href={`/narrator/${selected.rawyId}`} style={{ fontSize: 13.5 }}>پرۆفایل</Link>}>
+            <div style={{ ...AMIRI, fontSize: 17, marginBottom: 8 }}>{selected.rawy?.Shohra || selected.rawy?.Name}</div>
             <Descriptions
               size="small"
               column={1}
@@ -202,7 +202,7 @@ export default function SanadView({
             showIcon
             title="ڕێنمایی"
             description={
-              <span style={{ fontSize: 11.5, lineHeight: 1.9 }}>
+              <span style={{ fontSize: 13.5, lineHeight: 1.9 }}>
                 کرتە لەسەر ڕاوییەک بکە بۆ بینینی زانیارییەکانی. زنجیرە لە سەرەوە (نزیکترین
                 بە پێغەمبەر) بەرەو خوارەوە (کۆکەرەوە) دەخوێنرێتەوە.
               </span>
@@ -215,7 +215,7 @@ export default function SanadView({
             {hadith!.assessments!.map((a) => (
               <div key={a.index} style={{ padding: '8px 12px', borderBottom: `1px solid ${c.lineSoft}` }}>
                 <Space size={6} style={{ marginBottom: 3 }}>
-                  <Text strong style={{ fontSize: 10.5 }}>إسناد {toAr(a.index)}</Text>
+                  <Text strong style={{ fontSize: 13 }}>إسناد {toAr(a.index)}</Text>
                   {a.grades.map((g) => {
                     const t = GRADE[gradeKeyOf(g)] ?? GRADE.unknown;
                     return (
@@ -225,7 +225,7 @@ export default function SanadView({
                     );
                   })}
                 </Space>
-                {a.sharh && <div style={{ ...AMIRI, fontSize: 13, lineHeight: 1.8 }}>{a.sharh}</div>}
+                {a.sharh && <div style={{ ...AMIRI, fontSize: 15, lineHeight: 1.8 }}>{a.sharh}</div>}
               </div>
             ))}
           </Card>
@@ -233,7 +233,7 @@ export default function SanadView({
 
         {hadith?.hukmText && (
           <Card size="small" title="حوکمی تۆمارکراو">
-            <div style={{ ...AMIRI, fontSize: 13.5, lineHeight: 1.9 }}>{hadith.hukmText}</div>
+            <div style={{ ...AMIRI, fontSize: 15.5, lineHeight: 1.9 }}>{hadith.hukmText}</div>
           </Card>
         )}
       </aside>

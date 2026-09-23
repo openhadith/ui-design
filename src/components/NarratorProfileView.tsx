@@ -61,7 +61,7 @@ export default function NarratorProfileView({
       <Row gutter={[14, 14]}>
         <Col xs={24} lg={15}>
           <Card size="small" title="ناوی تەواو">
-            <div style={{ ...AMIRI, fontSize: 18, lineHeight: 2 }}>{str('name') ?? '—'}</div>
+            <div style={{ ...AMIRI, fontSize: 19, lineHeight: 2 }}>{str('name') ?? '—'}</div>
             {str('description') && <Paragraph style={{ marginTop: 8, marginBottom: 0 }}>{str('description')}</Paragraph>}
           </Card>
         </Col>

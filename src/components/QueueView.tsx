@@ -181,7 +181,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
             <span
               dir="rtl"
               style={{
-                fontFamily: 'var(--font-amiri), serif', fontSize: 14, lineHeight: 1.7,
+                fontFamily: 'var(--font-amiri), serif', fontSize: 16, lineHeight: 1.7,
                 display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical',
                 overflow: 'hidden',
               }}
@@ -193,9 +193,9 @@ export default function QueueView({ users, savedViews, teams }: Props) {
       },
     },
     {
-      title: 'سەرچاوە', key: 'book', width: 170, ellipsis: true,
+      title: 'سەرچاوە', key: 'book', width: 148, ellipsis: true,
       render: (_, r) => (
-        <Text style={{ fontSize: 11, color: c.inkFaint }}>{r.snapshot.bookTitle ?? '—'}</Text>
+        <Text style={{ fontSize: 13, color: c.inkFaint }}>{r.snapshot.bookTitle ?? '—'}</Text>
       ),
     },
     {
@@ -212,10 +212,10 @@ export default function QueueView({ users, savedViews, teams }: Props) {
       },
     },
     {
-      title: 'کێشەکان', key: 'issues', width: 180,
+      title: 'کێشەکان', key: 'issues', width: 138,
       render: (_, r) =>
         r.issues.length === 0 ? (
-          <Text style={{ fontSize: 10.5, color: c.inkPale }}>—</Text>
+          <Text style={{ fontSize: 13, color: c.inkPale }}>—</Text>
         ) : (
           <Space size={4} wrap>
             {r.issues.slice(0, 2).map((is, k) => {
@@ -226,12 +226,12 @@ export default function QueueView({ users, savedViews, teams }: Props) {
                 </Tag>
               );
             })}
-            {r.issues.length > 2 && <Text style={{ fontSize: 10 }}>+{toAr(r.issues.length - 2)}</Text>}
+            {r.issues.length > 2 && <Text style={{ fontSize: 12.5 }}>+{toAr(r.issues.length - 2)}</Text>}
           </Space>
         ),
     },
     {
-      title: 'بەرپرس', key: 'assignee', width: 140,
+      title: 'بەرپرس', key: 'assignee', width: 124,
       render: (_, r) =>
         r.assignee_name ? (
           <Space size={6}>
@@ -239,20 +239,20 @@ export default function QueueView({ users, savedViews, teams }: Props) {
               size={21}
               style={{
                 background: avatarOf(r.avatar_tone).bg, color: avatarOf(r.avatar_tone).fg,
-                fontSize: 9, fontWeight: 600,
+                fontSize: 11.5, fontWeight: 600,
               }}
             >
               {initials(r.assignee_name)}
             </Avatar>
-            <Text style={{ fontSize: 11 }}>{r.assignee_name}</Text>
+            <Text style={{ fontSize: 13 }}>{r.assignee_name}</Text>
           </Space>
         ) : (
-          <Text style={{ fontSize: 10.5, color: c.inkPale }}>نەدابەشکراو</Text>
+          <Text style={{ fontSize: 13, color: c.inkPale }}>نەدابەشکراو</Text>
         ),
     },
     {
-      title: 'نوێکردنەوە', key: 'updated', width: 86,
-      render: (_, r) => <Text style={{ fontSize: 10.5, color: c.inkGhost }}>{agoKu(r.updated_at)}</Text>,
+      title: 'نوێکراوە', key: 'updated', width: 86,
+      render: (_, r) => <Text style={{ fontSize: 13, color: c.inkGhost }}>{agoKu(r.updated_at)}</Text>,
     },
   ];
 
@@ -267,7 +267,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
             <Typography.Title level={4} style={{ margin: 0 }}>ڕیزی پەسەندکردن</Typography.Title>
-            <Text type="secondary" style={{ fontSize: 12 }}>{toAr(total)} ڕەکۆرد</Text>
+            <Text type="secondary" style={{ fontSize: 14 }}>{toAr(total)} ڕەکۆرد</Text>
             <Space style={{ marginInlineStart: 'auto' }}>
               <Input.Search
                 allowClear
@@ -306,7 +306,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
                     />
                   )}
                   {CHIP_LABEL[id]}
-                  <Text style={{ fontSize: 10.5, color: c.inkGhost }}>
+                  <Text style={{ fontSize: 13, color: c.inkGhost }}>
                     {toAr(id === 'all' ? counts.all : (counts.status[id] ?? 0))}
                   </Text>
                 </span>
@@ -323,7 +323,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
               background: c.emeraldSoft, borderBottom: '1px solid #cfe3d7', flexWrap: 'wrap',
             }}
           >
-            <Text strong style={{ color: c.emerald, fontSize: 12 }}>
+            <Text strong style={{ color: c.emerald, fontSize: 14 }}>
               {toAr(selected.length)} هەڵبژێردراو
             </Text>
             <Tooltip title={can('approve') ? undefined : 'ڕۆڵەکەت مۆڵەتی پەسەندکردنی نییە'}>
@@ -395,7 +395,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
           style={{
             flex: 'none', display: 'flex', alignItems: 'center', gap: 14, padding: '7px 20px',
             background: c.bar, borderTop: `1px solid ${c.lineStrong}`,
-            fontSize: 11, color: c.inkFaint,
+            fontSize: 13, color: c.inkFaint,
           }}
         >
           <span>↑↓ گەڕان</span>
@@ -407,7 +407,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
 
       <aside
         style={{
-          width: 252, flex: 'none', background: c.nav, borderInlineEnd: `1px solid ${c.lineNav}`,
+          width: 232, flex: 'none', background: c.nav, borderInlineEnd: `1px solid ${c.lineNav}`,
           overflowY: 'auto', padding: 14, display: 'flex', flexDirection: 'column', gap: 12,
         }}
       >
@@ -417,7 +417,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
               key={v.label}
               type="text"
               block
-              style={{ justifyContent: 'flex-start', fontSize: 12 }}
+              style={{ justifyContent: 'flex-start', fontSize: 14 }}
               onClick={() => {
                 const sp = new URLSearchParams();
                 Object.entries(v.query).forEach(([k, val]) => sp.set(k, String(val)));
@@ -438,7 +438,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
               type={issue === key ? 'default' : 'text'}
               block
               style={{
-                justifyContent: 'flex-start', fontSize: 11.5,
+                justifyContent: 'flex-start', fontSize: 13.5,
                 color: issue === key ? c.emerald : undefined,
               }}
               onClick={() => setParam('issue', issue === key ? null : key)}
@@ -447,7 +447,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
               <span style={{ flex: 1, textAlign: 'start' }}>{token.label}</span>
               <Badge
                 count={toAr(counts.issue[key] ?? 0)}
-                style={{ background: c.sunken, color: c.inkFaint, boxShadow: 'none', fontSize: 10 }}
+                style={{ background: c.sunken, color: c.inkFaint, boxShadow: 'none', fontSize: 12.5 }}
               />
             </Button>
           ))}
@@ -457,7 +457,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
           {teams.map((t) => (
             <div key={t.id} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 0' }}>
               <span style={{ width: 8, height: 8, borderRadius: 2, background: t.color }} />
-              <Text style={{ fontSize: 11.5 }}>{t.name}</Text>
+              <Text style={{ fontSize: 13.5 }}>{t.name}</Text>
             </div>
           ))}
         </Card>

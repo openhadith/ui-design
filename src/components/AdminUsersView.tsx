@@ -112,14 +112,14 @@ export default function AdminUsersView({
       render: (_, u) => (
         <Space size={8}>
           <UserAvatar name={u.name} tone={u.avatar_tone} size={26} />
-          <Text strong style={{ fontSize: 12.5 }}>{u.name}</Text>
+          <Text strong style={{ fontSize: 14.5 }}>{u.name}</Text>
           {u.status === 'off' && <Tag>ناچالاک</Tag>}
         </Space>
       ),
     },
     {
       title: 'ئیمەیل', dataIndex: 'email', key: 'email',
-      render: (v: string) => <Text dir="ltr" style={{ fontSize: 11.5, color: c.inkFaint }}>{v}</Text>,
+      render: (v: string) => <Text dir="ltr" style={{ fontSize: 13.5, color: c.inkFaint }}>{v}</Text>,
     },
     {
       title: 'ڕۆڵ', key: 'role', width: 170,
@@ -144,7 +144,7 @@ export default function AdminUsersView({
     },
     {
       title: 'دواین چالاکی', key: 'last', width: 110,
-      render: (_, u) => <Text style={{ fontSize: 11, color: c.inkGhost }}>{agoKu(u.last_seen)}</Text>,
+      render: (_, u) => <Text style={{ fontSize: 13, color: c.inkGhost }}>{agoKu(u.last_seen)}</Text>,
     },
   ];
 
@@ -156,7 +156,7 @@ export default function AdminUsersView({
       render: (_, r) => (
         <Space size={8}>
           <span style={{ width: 9, height: 9, borderRadius: 3, background: ROLE_COLOR[r.role], display: 'inline-block' }} />
-          <Text strong style={{ fontSize: 12.5 }}>{ROLE_LABEL[r.role]}</Text>
+          <Text strong style={{ fontSize: 14.5 }}>{ROLE_LABEL[r.role]}</Text>
         </Space>
       ),
     },
@@ -196,13 +196,13 @@ export default function AdminUsersView({
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6, flexWrap: 'wrap' }}>
-              <Text strong style={{ fontSize: 14 }}>{t.name}</Text>
+              <Text strong style={{ fontSize: 16 }}>{t.name}</Text>
               <Tag color="success">چالاک</Tag>
-              <Text type="secondary" style={{ marginInlineStart: 'auto', fontSize: 11.5 }}>
+              <Text type="secondary" style={{ marginInlineStart: 'auto', fontSize: 13.5 }}>
                 سەرپەرشتیار: {t.lead_name ?? '—'}
               </Text>
             </div>
-            <Text type="secondary" style={{ fontSize: 11.5 }}>{t.scope}</Text>
+            <Text type="secondary" style={{ fontSize: 13.5 }}>{t.scope}</Text>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: '8px 0' }}>
               <Progress
                 percent={pct}
@@ -212,7 +212,7 @@ export default function AdminUsersView({
                 style={{ flex: 1, margin: 0 }}
                 format={(p) => `${toAr(p ?? 0)}٪`}
               />
-              <Text style={{ fontSize: 11, color: c.inkGhost, flex: 'none' }}>
+              <Text style={{ fontSize: 13, color: c.inkGhost, flex: 'none' }}>
                 {toAr(t.done)} لە {toAr(t.total)}
               </Text>
             </div>
@@ -226,7 +226,7 @@ export default function AdminUsersView({
               </Avatar.Group>
               <Space size={4} wrap style={{ marginInlineStart: 'auto' }}>
                 {scope.map((b) => (
-                  <Tag key={b.book_id} style={{ fontFamily: 'var(--font-amiri), serif', fontSize: 12.5 }}>
+                  <Tag key={b.book_id} style={{ fontFamily: 'var(--font-amiri), serif', fontSize: 14.5 }}>
                     {b.book_title}
                   </Tag>
                 ))}
@@ -276,7 +276,7 @@ export default function AdminUsersView({
                   size="small"
                   title="ماتریکسی ڕۆڵ و مۆڵەت"
                   extra={
-                    <Text type="secondary" style={{ fontSize: 11 }}>
+                    <Text type="secondary" style={{ fontSize: 13 }}>
                       هەر خانەیەک یەکسەر کاردەکات — ئەم ماتریکسە ئەوەیە کە سیستەمەکە جێبەجێی دەکات
                     </Text>
                   }
@@ -308,9 +308,9 @@ export default function AdminUsersView({
             <div>
               <Space size={8}>
                 <span style={{ width: 10, height: 10, borderRadius: 3, background: team.color, display: 'inline-block' }} />
-                <Text strong style={{ fontSize: 14.5 }}>{team.name}</Text>
+                <Text strong style={{ fontSize: 16 }}>{team.name}</Text>
               </Space>
-              <div><Text type="secondary" style={{ fontSize: 11.5 }}>{team.scope}</Text></div>
+              <div><Text type="secondary" style={{ fontSize: 13.5 }}>{team.scope}</Text></div>
             </div>
 
             <Card size="small" title="ئەندامان" styles={{ body: { padding: 0 } }}>
@@ -323,7 +323,7 @@ export default function AdminUsersView({
                   }}
                 >
                   <UserAvatar name={m.name} tone={m.avatar_tone} />
-                  <Text style={{ flex: 1, fontSize: 12 }}>{m.name}</Text>
+                  <Text style={{ flex: 1, fontSize: 14 }}>{m.name}</Text>
                   <Tag style={{ marginInlineEnd: 0 }}>{TEAM_ROLE_LABEL[m.role] ?? m.role}</Tag>
                 </div>
               ))}
@@ -332,7 +332,7 @@ export default function AdminUsersView({
             <Card size="small" title="پەرتووکە دەستنیشانکراوەکان">
               <Space size={6} wrap>
                 {books.filter((b) => b.team_id === team.id).map((b) => (
-                  <Tag key={b.book_id} style={{ fontFamily: 'var(--font-amiri), serif', fontSize: 13 }}>
+                  <Tag key={b.book_id} style={{ fontFamily: 'var(--font-amiri), serif', fontSize: 15 }}>
                     {b.book_title}
                   </Tag>
                 ))}

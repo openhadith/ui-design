@@ -40,7 +40,7 @@ export function ChartCard<T extends object>({
       title={
         <div style={{ lineHeight: 1.4, paddingBlock: 4 }}>
           <div>{title}</div>
-          {subtitle && <Text type="secondary" style={{ fontSize: 11, fontWeight: 400 }}>{subtitle}</Text>}
+          {subtitle && <Text type="secondary" style={{ fontSize: 13, fontWeight: 400 }}>{subtitle}</Text>}
         </div>
       }
       extra={
@@ -109,7 +109,7 @@ export function BarList({ rows, labelWidth = 150 }: { rows: BarRow[]; labelWidth
                 {r.marker && (
                   <span style={{ width: 8, height: 8, borderRadius: 2, background: r.marker, flex: 'none' }} />
                 )}
-                <Text ellipsis style={{ fontSize: 12 }}>{r.label}</Text>
+                <Text ellipsis style={{ fontSize: 14 }}>{r.label}</Text>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, minWidth: 0 }}>
                 <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 2, height: BAR }}>
@@ -133,7 +133,7 @@ export function BarList({ rows, labelWidth = 150 }: { rows: BarRow[]; labelWidth
                     />
                   )}
                   {/* Value at the tip, in ink. */}
-                  <Text strong style={{ fontSize: 11.5, marginInlineStart: 6, whiteSpace: 'nowrap' }}>
+                  <Text strong style={{ fontSize: 13.5, marginInlineStart: 6, whiteSpace: 'nowrap' }}>
                     {r.tip ?? toAr(r.value)}
                   </Text>
                 </div>
@@ -173,7 +173,7 @@ export function ColumnChart({ points, height = 150 }: { points: ColumnPoint[]; h
               borderTop: `1px solid ${c.lineSoft}`,
             }}
           >
-            <Text style={{ position: 'absolute', insetInlineEnd: 0, top: -9, fontSize: 9.5, color: c.inkGhost, background: c.raised, paddingInline: 3 }}>
+            <Text style={{ position: 'absolute', insetInlineEnd: 0, top: -9, fontSize: 12, color: c.inkGhost, background: c.raised, paddingInline: 3 }}>
               {toAr(Math.round(max * f))}
             </Text>
           </div>
@@ -194,7 +194,7 @@ export function ColumnChart({ points, height = 150 }: { points: ColumnPoint[]; h
                 }}
               >
                 {labelled && (
-                  <Text strong style={{ fontSize: 10, marginBottom: 2 }}>{toAr(p.value)}</Text>
+                  <Text strong style={{ fontSize: 12.5, marginBottom: 2 }}>{toAr(p.value)}</Text>
                 )}
                 <div
                   style={{
@@ -211,7 +211,7 @@ export function ColumnChart({ points, height = 150 }: { points: ColumnPoint[]; h
       <div style={{ borderTop: `1px solid ${c.lineStrong}`, display: 'flex' }}>
         {points.map((p) => (
           <div key={p.key} style={{ flex: 1, textAlign: 'center', paddingTop: 4 }}>
-            {p.showLabel && <Text style={{ fontSize: 9.5, color: c.inkDim, whiteSpace: 'nowrap' }}>{p.label}</Text>}
+            {p.showLabel && <Text style={{ fontSize: 12, color: c.inkDim, whiteSpace: 'nowrap' }}>{p.label}</Text>}
           </div>
         ))}
       </div>

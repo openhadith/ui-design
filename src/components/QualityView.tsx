@@ -77,7 +77,7 @@ export default function QualityView({
         <span
           dir="rtl"
           style={{
-            fontFamily: 'var(--font-amiri), serif', fontSize: 14,
+            fontFamily: 'var(--font-amiri), serif', fontSize: 16,
             display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden',
           }}
         >
@@ -87,7 +87,7 @@ export default function QualityView({
     },
     {
       title: 'سەرچاوە', key: 'book', width: 170, ellipsis: true,
-      render: (_, f) => <Text style={{ fontSize: 11, color: c.inkFaint }}>{f.snapshot?.bookTitle ?? '—'}</Text>,
+      render: (_, f) => <Text style={{ fontSize: 13, color: c.inkFaint }}>{f.snapshot?.bookTitle ?? '—'}</Text>,
     },
     {
       title: 'دۆزەرەوە', key: 'detector', width: 90,
@@ -97,7 +97,7 @@ export default function QualityView({
       title: '', key: 'actions', width: 170,
       render: (_, f) => (
         <Space size={4}>
-          <Link href={`/hadith/${f.entity_id}`} style={{ fontSize: 11.5 }}>کردنەوە</Link>
+          <Link href={`/hadith/${f.entity_id}`} style={{ fontSize: 13.5 }}>کردنەوە</Link>
           {can('edit') && (
             <Button size="small" icon={<CheckOutlined />} disabled={busy} onClick={() => resolve([f.issue_id])}>
               چارەسەر
@@ -121,7 +121,7 @@ export default function QualityView({
           <Space style={{ marginInlineStart: 'auto' }}>
             {selected.length > 0 && (
               <>
-                <Text strong style={{ color: c.emerald, fontSize: 12 }}>
+                <Text strong style={{ color: c.emerald, fontSize: 14 }}>
                   {toAr(selected.length)} هەڵبژێردراو
                 </Text>
                 <Button type="primary" icon={<CheckOutlined />} disabled={busy || !can('edit')}
@@ -146,7 +146,7 @@ export default function QualityView({
                 strokeColor={c.emerald}
                 railColor={c.line}
                 format={(p) => (
-                  <span style={{ fontSize: 19, fontWeight: 700, color: c.emerald }}>{toAr(p ?? 0)}٪</span>
+                  <span style={{ fontSize: 21, fontWeight: 700, color: c.emerald }}>{toAr(p ?? 0)}٪</span>
                 )}
               />
               <Row gutter={28} style={{ flex: 1 }}>
@@ -184,7 +184,7 @@ export default function QualityView({
                       title={token.label}
                       value={toAr(t.count)}
                       suffix={
-                        <Text style={{ fontSize: 10.5, color: c.inkGhost }}>
+                        <Text style={{ fontSize: 13, color: c.inkGhost }}>
                           {toAr(t.auto)} ئۆتۆماتیک
                         </Text>
                       }
@@ -229,11 +229,11 @@ export default function QualityView({
               <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
                 <Text
                   ellipsis
-                  style={{ fontFamily: 'var(--font-amiri), serif', fontSize: 13, maxWidth: 190 }}
+                  style={{ fontFamily: 'var(--font-amiri), serif', fontSize: 15, maxWidth: 190 }}
                 >
                   {b.book}
                 </Text>
-                <Text strong style={{ fontSize: 11 }}>{toAr(b.count)}</Text>
+                <Text strong style={{ fontSize: 13 }}>{toAr(b.count)}</Text>
               </div>
               <Progress
                 percent={Math.round((b.count / bookPeak) * 100)}
@@ -253,7 +253,7 @@ export default function QualityView({
             type="warning"
             showIcon
             style={{ marginBottom: 10 }}
-            title={<span style={{ fontSize: 11.5 }}>ئەم کردارانە کاریگەری لەسەر هەموو داتاکە دەبێت و لەم نمایشەدا ناچالاککراون.</span>}
+            title={<span style={{ fontSize: 13.5 }}>ئەم کردارانە کاریگەری لەسەر هەموو داتاکە دەبێت و لەم نمایشەدا ناچالاککراون.</span>}
           />
           <Space orientation="vertical" style={{ width: '100%' }}>
             <Button block disabled icon={<ReloadOutlined />}>ڕێکخستنەوەی ئیندێکس</Button>

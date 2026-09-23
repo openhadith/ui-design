@@ -74,12 +74,12 @@ export default function AssignmentsView({
         const t = avatarOf(p.avatar_tone);
         return (
           <Space size={9}>
-            <Avatar size={28} style={{ background: t.bg, color: t.fg, fontSize: 11, fontWeight: 600 }}>
+            <Avatar size={28} style={{ background: t.bg, color: t.fg, fontSize: 13, fontWeight: 600 }}>
               {initials(p.name)}
             </Avatar>
             <div style={{ lineHeight: 1.3 }}>
-              <Text strong style={{ fontSize: 12.5 }}>{p.name}</Text>
-              <div><Text type="secondary" style={{ fontSize: 10.5 }}>{ROLE_LABEL[p.role] ?? p.role}</Text></div>
+              <Text strong style={{ fontSize: 14.5 }}>{p.name}</Text>
+              <div><Text type="secondary" style={{ fontSize: 13 }}>{ROLE_LABEL[p.role] ?? p.role}</Text></div>
             </div>
           </Space>
         );
@@ -108,7 +108,7 @@ export default function AssignmentsView({
       title: 'کراوە', dataIndex: 'open', key: 'open', width: 80, align: 'center',
       sorter: (a, b) => a.open - b.open,
       defaultSortOrder: 'descend',
-      render: (v: number) => <Text strong style={{ fontSize: 13 }}>{toAr(v)}</Text>,
+      render: (v: number) => <Text strong style={{ fontSize: 15 }}>{toAr(v)}</Text>,
     },
     {
       title: 'تەواو', dataIndex: 'done', key: 'done', width: 80, align: 'center',
@@ -117,14 +117,14 @@ export default function AssignmentsView({
     },
     {
       title: '', key: 'link', width: 70,
-      render: (_, p) => <Link href={`/queue?assignee=${p.id}`} style={{ fontSize: 11.5 }}>بینین</Link>,
+      render: (_, p) => <Link href={`/queue?assignee=${p.id}`} style={{ fontSize: 13.5 }}>بینین</Link>,
     },
   ];
 
   const bookColumns: ColumnsType<BookLoad> = [
     {
       title: 'پەرتووک', dataIndex: 'book', key: 'book', width: 260,
-      render: (v: string) => <span style={{ fontFamily: 'var(--font-amiri), serif', fontSize: 14 }}>{v}</span>,
+      render: (v: string) => <span style={{ fontFamily: 'var(--font-amiri), serif', fontSize: 16 }}>{v}</span>,
     },
     {
       title: 'پێشکەوتن', key: 'bar',
@@ -183,7 +183,7 @@ export default function AssignmentsView({
             <Popconfirm
               title="هاوسەنگکردنی خۆکار؟"
               description={
-                <span style={{ fontSize: 12 }}>
+                <span style={{ fontSize: 14 }}>
                   هەموو ڕەکۆردە کراوەکان{team ? ' لەم تیمەدا' : ''} بەسەر ئەندامانی کەمبار
                   دابەش دەکرێنەوە. ئەمە بەرپرسیارێتی ئێستا دەگۆڕێت.
                 </span>
@@ -248,7 +248,7 @@ export default function AssignmentsView({
               type="warning"
               showIcon
               title={
-                <span style={{ fontSize: 11.5, lineHeight: 1.9 }}>
+                <span style={{ fontSize: 13.5, lineHeight: 1.9 }}>
                   <b>{heavy.map((p) => p.name).join('، ')}</b> زۆر بارکراون
                   {light.length > 0 && <> و <b>{light.map((p) => p.name).join('، ')}</b> جێگەی زیادەیان هەیە</>}
                   . «هاوسەنگکردنی خۆکار» ئەمە ڕاست دەکاتەوە.

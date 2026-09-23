@@ -105,7 +105,7 @@ export default function StudioChrome({
               <Badge
                 count={toAr(pendingCount)}
                 overflowCount={9999}
-                style={{ background: c.goldSoft, color: c.goldFg, boxShadow: 'none', fontSize: 10 }}
+                style={{ background: c.goldSoft, color: c.goldFg, boxShadow: 'none', fontSize: 12.5 }}
               />
             ) : null}
           </Link>
@@ -135,16 +135,16 @@ export default function StudioChrome({
         >
           <div
             style={{
-              width: 26, height: 26, borderRadius: 6, background: c.emerald, color: '#fff',
+              width: 30, height: 30, borderRadius: 7, background: c.emerald, color: '#fff',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontFamily: 'var(--font-amiri), serif', fontWeight: 700, fontSize: 17,
+              fontFamily: 'var(--font-amiri), serif', fontWeight: 700, fontSize: 19,
             }}
           >
             ح
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
-            <span style={{ fontSize: 13.5, fontWeight: 600 }}>دەزگای پەسەندکردنی حەدیس</span>
-            <span style={{ fontSize: 10.5, color: c.inkDim }}>Muhaqqiq · وۆرک‌ستەیشن</span>
+            <span style={{ fontSize: 15.5, fontWeight: 600 }}>دەزگای پەسەندکردنی حەدیس</span>
+            <span style={{ fontSize: 13, color: c.inkDim }}>Muhaqqiq · وۆرک‌ستەیشن</span>
           </div>
         </Link>
 
@@ -193,8 +193,8 @@ export default function StudioChrome({
                 disabled: true,
                 label: (
                   <div style={{ paddingBlock: 4 }}>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: c.ink }}>{user.name}</div>
-                    <div dir="ltr" style={{ fontSize: 10.5, color: c.inkGhost, textAlign: 'start' }}>
+                    <div style={{ fontSize: 14, fontWeight: 600, color: c.ink }}>{user.name}</div>
+                    <div dir="ltr" style={{ fontSize: 13, color: c.inkGhost, textAlign: 'start' }}>
                       {user.email}
                     </div>
                   </div>
@@ -206,7 +206,7 @@ export default function StudioChrome({
                 disabled: true,
                 icon: <SafetyOutlined />,
                 label: (
-                  <span style={{ fontSize: 11.5 }}>
+                  <span style={{ fontSize: 13.5 }}>
                     {ROLE_LABEL[user.role] ?? user.role}
                   </span>
                 ),
@@ -224,20 +224,20 @@ export default function StudioChrome({
         >
           <button
             style={{
-              display: 'flex', alignItems: 'center', gap: 8, height: 36, padding: '0 6px',
+              display: 'flex', alignItems: 'center', gap: 8, height: 40, padding: '0 6px',
               background: 'transparent', border: 'none', borderRadius: 8, cursor: 'pointer',
               fontFamily: 'inherit',
             }}
           >
             <div style={{ textAlign: 'start', lineHeight: 1.2 }}>
-              <div style={{ fontSize: 11.5, fontWeight: 600, color: c.ink }}>{user.name}</div>
-              <div style={{ fontSize: 10, color: c.inkDim }}>
+              <div style={{ fontSize: 13.5, fontWeight: 600, color: c.ink }}>{user.name}</div>
+              <div style={{ fontSize: 12.5, color: c.inkDim }}>
                 {ROLE_LABEL[user.role] ?? user.role}
               </div>
             </div>
             <Avatar
-              size={30}
-              style={{ background: tone.bg, color: tone.fg, fontSize: 11, fontWeight: 600 }}
+              size={34}
+              style={{ background: tone.bg, color: tone.fg, fontSize: 13, fontWeight: 600 }}
             >
               {initials(user.name)}
             </Avatar>
@@ -288,12 +288,12 @@ export default function StudioChrome({
                     href={`/queue?issue=${col.type}`}
                     style={{
                       display: 'flex', alignItems: 'center', gap: 9, padding: '6px 12px',
-                      borderRadius: 8, color: c.inkMuted, fontSize: 11.5,
+                      borderRadius: 8, color: c.inkMuted, fontSize: 13.5,
                     }}
                   >
                     <span style={{ width: 8, height: 8, borderRadius: 2, background: token.dot, flex: 'none' }} />
                     <span style={{ flex: 1 }}>{token.label}</span>
-                    <span style={{ fontSize: 10.5, color: c.inkGhost }}>{toAr(col.count)}</span>
+                    <span style={{ fontSize: 13, color: c.inkGhost }}>{toAr(col.count)}</span>
                   </Link>
                 );
               })}
@@ -311,7 +311,7 @@ export default function StudioChrome({
             style={{
               flex: 'none', height: 26, display: 'flex', alignItems: 'center', gap: 14,
               paddingInline: 16, background: c.emeraldDeep, color: 'rgba(255,255,255,.75)',
-              fontSize: 10.5,
+              fontSize: 13,
             }}
           >
             <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -335,7 +335,7 @@ export default function StudioChrome({
 
 function GroupLabel({ children }: { children: ReactNode }) {
   return (
-    <span style={{ fontSize: 10.5, fontWeight: 700, color: c.inkGhost, letterSpacing: '.3px' }}>
+    <span style={{ fontSize: 13, fontWeight: 700, color: c.inkGhost, letterSpacing: '.3px' }}>
       {children}
     </span>
   );
