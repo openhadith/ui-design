@@ -91,7 +91,7 @@ export default function LoginView({
         justifyContent: 'center', padding: 24, background: shell.canvas, overflowY: 'auto',
       }}
     >
-      <div style={{ width: '100%', maxWidth: 880, display: 'flex', flexDirection: 'column', gap: 18 }}>
+      <div style={{ width: '100%', maxWidth: 940, display: 'flex', flexDirection: 'column', gap: 22 }}>
         {/* brand */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, justifyContent: 'center' }}>
           <div
@@ -147,7 +147,7 @@ export default function LoginView({
           <div
             style={{
               marginTop: 12, display: 'grid', gap: 10,
-              gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(min(330px, 100%), 1fr))',
             }}
           >
             {accounts.map((a) => {
@@ -175,8 +175,22 @@ export default function LoginView({
                       {initials(a.name)}
                     </Avatar>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: 16.5, fontWeight: 600, color: c.ink }}>{a.name}</div>
-                      <div dir="ltr" style={{ fontSize: 15, color: c.inkGhost, textAlign: 'start' }}>
+                      <div
+                        style={{
+                          fontSize: 16.5, fontWeight: 600, color: c.ink,
+                          overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                        }}
+                      >
+                        {a.name}
+                      </div>
+                      <div
+                        dir="ltr"
+                        title={a.email}
+                        style={{
+                          fontSize: 15, color: c.inkGhost, textAlign: 'start',
+                          overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                        }}
+                      >
                         {a.email}
                       </div>
                     </div>

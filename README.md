@@ -196,11 +196,28 @@ by id such as `HDT-4508`, and live corpus search); `↑↓` move, `Space` select
 - Toasts go through `App.useApp()`, never the static `message.*` export, which
   renders outside the theme context.
 - **Type:** three families, stacked so the browser picks per glyph. **Outfit**
-  sets the interface — labels, numbers, buttons — but is Latin-only, so Kurdish
-  and Arabic fall through to **IBM Plex Sans Arabic**, the public site's face.
-  Arabic matn is **Amiri**. The base is 16px on a 1.7 line-height, matching the
-  reading site rather than shrinking for density; AntD controls and table cells
-  are sized up to match.
+  sets the interface — labels, numbers, buttons — but carries no Arabic script,
+  so Kurdish falls through to **Vazirmatn**. Vazirmatn is drawn for Persian,
+  which means Sorani's extra letters (ڕ ڵ ێ ۆ ە) are real glyphs in the family
+  rather than additions bolted onto an Arabic-only face — they sit on the
+  baseline and keep their counters open at 13px. Arabic matn is **Amiri**. The
+  base is 16px on a 1.65 line-height, matching the reading site rather than
+  shrinking for density.
+
+  **Do not remove the `fallback` array on Outfit in `layout.tsx`.** Without it
+  next/font appends a generated fallback and `--font-outfit` resolves to
+  `"Outfit", "Outfit Fallback"`, where that fallback is `src: local(Arial)`.
+  Arial covers Arabic script, so it answers for every Kurdish glyph and the
+  browser never reaches Vazirmatn — the whole UI silently renders in Arial.
+  `adjustFontFallback: false` looks like the fix but the Turbopack font loader
+  in Next 16 ignores it; naming a fallback is what actually suppresses it.
+
+- **Spacing:** one scale, `--sp-1` … `--sp-8` on `:root` in `globals.css`, and
+  every gutter, gap and pad in the shell comes from it. The working surface is a
+  `container-type: inline-size` context, so cards size against the room they
+  actually have — the dashboard keeps a 348px side rail the viewport knows
+  nothing about, and its stat tiles drop to 2×2 there while wider screens keep
+  four across.
 
 ---
 

@@ -88,7 +88,7 @@ export default function CompareView({
     <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       <div
         style={{
-          flex: 'none', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 10,
+          flex: 'none', padding: '18px 32px', display: 'flex', alignItems: 'center', gap: 12,
           borderBottom: `1px solid ${shell.cardBorder}`, flexWrap: 'wrap',
         }}
       >
@@ -106,7 +106,7 @@ export default function CompareView({
       {!a || !b ? (
         <div style={{ padding: 40 }}><Empty description="دوو ژمارەی حەدیس بنووسە بۆ بەراوردکردنیان" /></div>
       ) : (
-        <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 20px 40px', display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '24px 32px 48px', display: 'flex', flexDirection: 'column', gap: 20 }}>
           <Card size="small">
             <div style={{ display: 'flex', alignItems: 'center', gap: 22, flexWrap: 'wrap' }}>
               <Progress

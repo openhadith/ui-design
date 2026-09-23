@@ -6,7 +6,7 @@ import {
   ArrowLeftOutlined, CheckSquareOutlined, CopyOutlined, ExclamationCircleOutlined,
   FileAddOutlined, FileDoneOutlined, SearchOutlined, StarFilled, TrophyOutlined,
 } from '@ant-design/icons';
-import { Card, Matn, PageHead, StatGrid, StatTile } from './ui';
+import { Card, Matn, PageHead, Section, Split, StatGrid, StatTile } from './ui';
 import type { DashboardData } from '@/lib/dashboard';
 import { agoKu, avatarOf, c, initials, shell, toAr, todayLabel } from '@/lib/tokens';
 
@@ -64,7 +64,7 @@ export default function DashboardView({ data }: { data: DashboardData }) {
         />
 
         {/* Today's progress — the one line that says whether the day is on track. */}
-        <Card style={{ marginBottom: 16 }}>
+        <Card style={{ marginBottom: 'var(--sp-8)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
             <div style={{ minWidth: 190 }}>
               <div style={{ fontSize: 14.5, color: c.inkFaint, marginBottom: 4 }}>ئەمڕۆ</div>
@@ -109,7 +109,8 @@ export default function DashboardView({ data }: { data: DashboardData }) {
           </div>
         </Card>
 
-        <StatGrid>
+        <Section title="کۆی کار">
+          <StatGrid>
           <StatTile
             label="چاوەڕوانی پێداچوونەوە"
             value={toAr(kpis.pending)}
@@ -148,9 +149,11 @@ export default function DashboardView({ data }: { data: DashboardData }) {
             iconColor={c.blue}
             hint={trend.duplicates7 ? `${toAr(trend.duplicates7)} نوێ لەم ٧ ڕۆژەدا` : 'هیچ نوێیەک لەم ٧ ڕۆژەدا'}
           />
-        </StatGrid>
+          </StatGrid>
+        </Section>
 
-        <div style={{ display: 'grid', gap: 14, gridTemplateColumns: 'minmax(0, 1.55fr) minmax(0, 1fr)' }}>
+        <Section title="ڕەوتی هەفتە و باری داتا">
+          <div style={{ display: 'grid', gap: 'var(--sp-5)', gridTemplateColumns: 'minmax(0, 1.35fr) minmax(0, 1fr)' }}>
           <Card
             title="چالاکی ئەم هەفتەیە"
             extra={`کۆ: ${toAr(week.reduce((s, w) => s + w.count, 0))} بڕیار`}
@@ -187,10 +190,10 @@ export default function DashboardView({ data }: { data: DashboardData }) {
           </Card>
 
           <Card title="باری داتابەیس">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
               <Progress
                 type="circle"
-                size={104}
+                size={96}
                 percent={healthPct}
                 strokeColor={c.emerald}
                 railColor="#efeae0"
@@ -210,10 +213,12 @@ export default function DashboardView({ data }: { data: DashboardData }) {
                 <Link href="/admin/quality" style={{ fontSize: 14.5 }}>هەموو کێشەکان →</Link>
               </div>
             </div>
-          </Card>
-        </div>
+            </Card>
+          </div>
+        </Section>
 
-        <div style={{ display: 'grid', gap: 14, gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', marginTop: 14 }}>
+        <Section title="دوایین جموجۆڵ" action={<Link href="/admin/audit">تۆماری کردار →</Link>}>
+          <Split>
           <Card
             title="دواین دەستکارییەکان"
             extra={<Link href="/admin/audit">هەموو</Link>}
@@ -253,9 +258,10 @@ export default function DashboardView({ data }: { data: DashboardData }) {
                   </div>
                 </Link>
               ))
-            )}
-          </Card>
-        </div>
+              )}
+            </Card>
+          </Split>
+        </Section>
       </div>
 
       <aside className="side-rail">
@@ -311,7 +317,7 @@ function Legend({ color, label, value }: { color: string; label: string; value: 
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
       <span style={{ width: 9, height: 9, borderRadius: 3, background: color, flex: 'none' }} />
-      <span style={{ flex: 1 }}>{label}</span>
+      <span style={{ flex: 1, whiteSpace: 'nowrap' }}>{label}</span>
       <b style={{ color: c.ink, fontVariantNumeric: 'tabular-nums' }}>{toAr(value)}</b>
     </div>
   );

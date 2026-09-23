@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Amiri, IBM_Plex_Sans_Arabic, Outfit } from 'next/font/google';
+import { Amiri, Outfit, Vazirmatn } from 'next/font/google';
 import './globals.css';
 import { StudioProvider } from '@/components/StudioContext';
 import AntdProvider from '@/components/AntdProvider';
@@ -11,8 +11,10 @@ import { query } from '@/lib/db';
  *
  * - Outfit sets the interface — labels, numbers, buttons. It is Latin-only, so
  *   it is first in the stack and the browser falls back per glyph.
- * - IBM Plex Sans Arabic picks up the Kurdish chrome, including the extended
- *   glyphs Sorani needs, which Outfit cannot render at all.
+ * - Vazirmatn sets the Kurdish chrome. It is drawn for Persian, so Sorani's
+ *   extended letters (ڕ ڵ ێ ۆ ە) are native glyphs rather than additions to an
+ *   Arabic-only face, which is why they sit on the baseline properly and keep
+ *   their counters open at 13px.
  * - Amiri sets Arabic matn and narrator names, where a serif reads better at
  *   the sizes this content is set in.
  */
@@ -21,11 +23,27 @@ const outfit = Outfit({
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-outfit',
   display: 'swap',
+  /*
+   * This fallback list is load-bearing, not decoration.
+   *
+   * Given no `fallback`, next/font appends a metric-matched face of its own and
+   * --font-outfit resolves to `"Outfit", "Outfit Fallback"` — where that
+   * fallback is `src: local(Arial)`. Arial covers Arabic script, so a Kurdish
+   * glyph would be served by Arial and the browser would never reach Vazirmatn
+   * further down the stack. Every Kurdish label in the app rendered in Arial
+   * because of it.
+   *
+   * Naming a fallback suppresses the generated one, so the chain stays under
+   * our control and hands Arabic script to Vazirmatn. `adjustFontFallback`
+   * looks like the obvious switch for this but the Turbopack font loader in
+   * Next 16 ignores it — verified by reading the emitted @font-face.
+   */
+  fallback: ['Vazirmatn', 'Noto Sans Arabic', 'system-ui', 'sans-serif'],
 });
-const plexArabic = IBM_Plex_Sans_Arabic({
+const vazir = Vazirmatn({
   subsets: ['arabic'],
   weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-plex-arabic',
+  variable: '--font-vazir',
   display: 'swap',
   fallback: ['Noto Sans Arabic', 'system-ui', 'sans-serif'],
 });
@@ -78,7 +96,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html
       lang="ckb"
       dir="rtl"
-      className={`${outfit.variable} ${plexArabic.variable} ${amiri.variable}`}
+      className={`${outfit.variable} ${vazir.variable} ${amiri.variable}`}
     >
       <body>
         <AntdProvider>

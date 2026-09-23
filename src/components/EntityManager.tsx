@@ -236,12 +236,12 @@ export default function EntityManager({ type }: { type: EntityType }) {
     <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       <div
         style={{
-          flex: 'none', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: 12,
+          flex: 'none', padding: '18px 32px', display: 'flex', alignItems: 'center', gap: 14,
           borderBottom: `1px solid ${shell.cardBorder}`, flexWrap: 'wrap',
         }}
       >
         <Typography.Title level={4} style={{ margin: 0 }}>{def.labelPlural}</Typography.Title>
-        <Text style={{ fontSize: 16, color: c.inkDim }}>{toAr(total)}</Text>
+        <Text style={{ fontSize: 16, color: c.inkDim }}>{toAr(total.toLocaleString('en'))}</Text>
 
         <Space style={{ marginInlineStart: 'auto' }}>
           <Input.Search
@@ -265,7 +265,7 @@ export default function EntityManager({ type }: { type: EntityType }) {
           <Alert
             type="warning"
             showIcon
-            style={{ marginBottom: 12 }}
+            style={{ marginBottom: 20 }}
             title="ڕەکۆردە شاردراوەکان"
             description={
               <span style={{ fontSize: 15 }}>
@@ -285,7 +285,7 @@ export default function EntityManager({ type }: { type: EntityType }) {
           <Alert
             type="info"
             showIcon
-            style={{ marginBottom: 12 }}
+            style={{ marginBottom: 20 }}
             title={`${toAr(dirty)} گۆڕانکاری لە وۆرک‌ستەیشندا هەڵگیراوە`}
             description={
               <span style={{ fontSize: 15 }}>
@@ -350,7 +350,7 @@ export default function EntityManager({ type }: { type: EntityType }) {
           <Alert
             type="warning"
             showIcon
-            style={{ marginBottom: 14 }}
+            style={{ marginBottom: 20 }}
             title="دەستکاری داتای ڕەسەن"
             description={
               <span style={{ fontSize: 15, lineHeight: 1.8 }}>

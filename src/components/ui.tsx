@@ -33,6 +33,39 @@ export function PageHead({
   );
 }
 
+/**
+ * A labelled band of cards.
+ *
+ * A dashboard screen carries several unrelated things at once; without a break
+ * between them the page is one long stack and nothing signals where one subject
+ * ends and the next begins. The rule after the label runs to the end of the row
+ * so it reads as a heading rather than as loose text.
+ */
+export function Section({
+  title, action, children,
+}: {
+  title?: ReactNode;
+  action?: ReactNode;
+  children: ReactNode;
+}) {
+  return (
+    <section className="section">
+      {(title || action) && (
+        <div className="section-head">
+          {title && <h2 className="section-title">{title}</h2>}
+          {action && <div className="section-action">{action}</div>}
+        </div>
+      )}
+      {children}
+    </section>
+  );
+}
+
+/** Two cards side by side, stacking when the surface runs out of room. */
+export function Split({ children }: { children: ReactNode }) {
+  return <div className="split">{children}</div>;
+}
+
 export function Card({
   title, extra, children, pad = true, style, bodyStyle,
 }: {

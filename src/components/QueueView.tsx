@@ -193,13 +193,13 @@ export default function QueueView({ users, savedViews, teams }: Props) {
       },
     },
     {
-      title: 'سەرچاوە', key: 'book', width: 160, ellipsis: true,
+      title: 'سەرچاوە', key: 'book', width: 148, ellipsis: true,
       render: (_, r) => (
         <Text style={{ fontSize: 15, color: c.inkFaint }}>{r.snapshot.bookTitle ?? '—'}</Text>
       ),
     },
     {
-      title: 'پلە', key: 'grade', width: 82,
+      title: 'پلە', key: 'grade', width: 74,
       render: (_, r) => {
         const g = GRADE[r.grade ?? 'unknown'] ?? GRADE.unknown;
         return (
@@ -212,7 +212,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
       },
     },
     {
-      title: 'کێشەکان', key: 'issues', width: 146,
+      title: 'کێشەکان', key: 'issues', width: 118,
       render: (_, r) =>
         r.issues.length === 0 ? (
           <Text style={{ fontSize: 15, color: c.inkPale }}>—</Text>
@@ -231,27 +231,33 @@ export default function QueueView({ users, savedViews, teams }: Props) {
         ),
     },
     {
-      title: 'بەرپرس', key: 'assignee', width: 136,
+      title: 'بەرپرس', key: 'assignee', width: 118,
       render: (_, r) =>
         r.assignee_name ? (
-          <Space size={6}>
+          // Truncated rather than wrapped: this list is driven by ↑↓, and a
+          // long name on one row would make that row taller than its
+          // neighbours and the cursor jump unevenly down the page.
+          <span
+            title={r.assignee_name}
+            style={{ display: 'flex', alignItems: 'center', gap: 6, minWidth: 0 }}
+          >
             <Avatar
               size={21}
               style={{
                 background: avatarOf(r.avatar_tone).bg, color: avatarOf(r.avatar_tone).fg,
-                fontSize: 13.5, fontWeight: 600,
+                fontSize: 13.5, fontWeight: 600, flex: 'none',
               }}
             >
               {initials(r.assignee_name)}
             </Avatar>
-            <Text style={{ fontSize: 15 }}>{r.assignee_name}</Text>
-          </Space>
+            <Text ellipsis style={{ fontSize: 15 }}>{r.assignee_name}</Text>
+          </span>
         ) : (
           <Text style={{ fontSize: 15, color: c.inkPale }}>نەدابەشکراو</Text>
         ),
     },
     {
-      title: 'نوێکراوە', key: 'updated', width: 92,
+      title: 'نوێکراوە', key: 'updated', width: 80,
       render: (_, r) => <Text style={{ fontSize: 15, color: c.inkGhost }}>{agoKu(r.updated_at)}</Text>,
     },
   ];
@@ -261,8 +267,8 @@ export default function QueueView({ users, savedViews, teams }: Props) {
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
         <div
           style={{
-            flex: 'none', padding: '14px 20px 10px', display: 'flex', flexDirection: 'column',
-            gap: 10, borderBottom: `1px solid ${shell.cardBorder}`,
+            flex: 'none', padding: '20px 32px 16px', display: 'flex', flexDirection: 'column',
+            gap: 14, borderBottom: `1px solid ${shell.cardBorder}`,
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
@@ -290,12 +296,16 @@ export default function QueueView({ users, savedViews, teams }: Props) {
             </Space>
           </div>
 
-          <Segmented
-            value={status}
-            onChange={(v) => setParam('status', String(v))}
-            options={CHIPS.map((id) => ({
-              value: id,
-              label: (
+          {/* Eight filters do not fit at this type size on a 1440px screen, and a
+              Segmented track cannot wrap. Scrolling the row is honest about
+              that; clipping it would silently hide the last filters. */}
+          <div className="chip-row">
+            <Segmented
+              value={status}
+              onChange={(v) => setParam('status', String(v))}
+              options={CHIPS.map((id) => ({
+                value: id,
+                label: (
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
                   {id !== 'all' && (
                     <span
@@ -310,16 +320,17 @@ export default function QueueView({ users, savedViews, teams }: Props) {
                     {toAr(id === 'all' ? counts.all : (counts.status[id] ?? 0))}
                   </Text>
                 </span>
-              ),
-            }))}
-          />
+                ),
+              }))}
+            />
+          </div>
         </div>
 
         {/* Bulk bar — appears only with a selection. */}
         {selected.length > 0 && (
           <div
             style={{
-              flex: 'none', display: 'flex', alignItems: 'center', gap: 8, padding: '9px 20px',
+              flex: 'none', display: 'flex', alignItems: 'center', gap: 10, padding: '12px 32px',
               background: c.emeraldSoft, borderBottom: '1px solid #cfe3d7', flexWrap: 'wrap',
             }}
           >
@@ -361,7 +372,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
           </div>
         )}
 
-        <div ref={wrapRef} style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '0 20px 20px' }}>
+        <div ref={wrapRef} style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '0 32px 28px' }}>
           <Table<QueueRow>
             rowKey="id"
             size="small"
@@ -393,7 +404,7 @@ export default function QueueView({ users, savedViews, teams }: Props) {
 
         <div
           style={{
-            flex: 'none', display: 'flex', alignItems: 'center', gap: 14, padding: '7px 20px',
+            flex: 'none', display: 'flex', alignItems: 'center', gap: 16, padding: '9px 32px',
             background: shell.card, borderTop: `1px solid ${shell.cardBorder}`,
             fontSize: 15, color: c.inkFaint,
           }}

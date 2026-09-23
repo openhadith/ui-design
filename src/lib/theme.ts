@@ -77,10 +77,10 @@ export const studioTheme: ThemeConfig = {
     fontSizeHeading5: 16,
     // Tight corners, as the house dashboards use — 11px reads soft and toylike
     // next to a hairline card.
-    borderRadius: 6,
-    borderRadiusLG: 8,
-    borderRadiusSM: 4,
-    borderRadiusXS: 3,
+    borderRadius: 8,
+    borderRadiusLG: 12,
+    borderRadiusSM: 6,
+    borderRadiusXS: 4,
     controlHeight: 38,
     controlHeightSM: 32,
     controlHeightLG: 46,
@@ -91,13 +91,22 @@ export const studioTheme: ThemeConfig = {
     boxShadow: shell.shadowSm,
     boxShadowSecondary: shell.shadowMd,
 
+    // AntD's defaults are tuned for a 14px base; at 16px they read as cramped.
+    padding: 20,
+    paddingLG: 26,
+    paddingSM: 14,
+    paddingXS: 10,
+    margin: 20,
+    marginLG: 26,
+    marginSM: 14,
+
     /**
-     * The public site's stack, so the two applications read as one product.
-     * IBM Plex Sans Arabic covers Latin and Arabic script alike, which matters
-     * here: the chrome is Kurdish and the numerals sit inside it.
+     * Outfit leads for Latin and the numerals; Vazirmatn, drawn for Persian,
+     * carries the Kurdish. The browser picks per glyph, so a Kurdish label with
+     * a Latin id inside it gets both without any markup.
      */
     fontFamily:
-      "var(--font-outfit), var(--font-plex-arabic), 'Noto Sans Arabic', system-ui, sans-serif",
+      "var(--font-outfit), var(--font-vazir), 'Noto Sans Arabic', system-ui, sans-serif",
 
     wireframe: false,
   },
@@ -113,8 +122,8 @@ export const studioTheme: ThemeConfig = {
       rowSelectedBg: c.emeraldSoft,
       rowSelectedHoverBg: c.emeraldTint,
       borderColor: shell.cardBorderSoft,
-      cellPaddingBlock: 13,
-      cellPaddingInline: 15,
+      cellPaddingBlock: 16,
+      cellPaddingInline: 13,
       fontSize: 15,
     },
     Card: { headerBg: 'transparent', boxShadow: 'none', colorBorderSecondary: shell.cardBorder },
@@ -123,7 +132,7 @@ export const studioTheme: ThemeConfig = {
       itemSelectedColor: c.emerald,
       itemHoverColor: c.emeraldDeep,
       inkBarColor: c.emerald,
-      horizontalMargin: '0 0 12px 0',
+      horizontalMargin: '0 0 20px 0',
     },
     Tag: { defaultBg: shell.sunken, defaultColor: c.inkMuted, borderRadiusSM: 4, fontSize: 13.5 },
     Button: {
@@ -134,13 +143,13 @@ export const studioTheme: ThemeConfig = {
     },
     Input: { activeShadow: `0 0 0 2px ${c.emerald}1f` },
     Select: { optionSelectedBg: c.emeraldSoft },
-Modal: { headerBg: shell.card, contentBg: shell.card, titleFontSize: 18, borderRadiusLG: 8 },
-    Drawer: { footerPaddingBlock: 12, footerPaddingInline: 16 },
+    Modal: { headerBg: shell.card, contentBg: shell.card, titleFontSize: 18, borderRadiusLG: 12 },
+    Drawer: { footerPaddingBlock: 16, footerPaddingInline: 24 },
 Statistic: { titleFontSize: 14, contentFontSize: 32 },
     Descriptions: { labelBg: c.sunken, titleMarginBottom: 8 },
     Segmented: { itemSelectedBg: shell.card, itemSelectedColor: c.emerald, trackBg: '#f1eee7', borderRadius: 5 },
     Progress: { defaultColor: c.emerald, remainingColor: c.line },
 Badge: { textFontSize: 13 },
-    Alert: { withDescriptionPadding: '12px 16px' },
+    Alert: { withDescriptionPadding: '16px 20px', borderRadiusLG: 8 },
   },
 };

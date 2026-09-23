@@ -240,7 +240,7 @@ export default function AdminUsersView({
 
   return (
     <div style={{ flex: 1, minHeight: 0, display: 'flex', overflow: 'hidden' }}>
-      <div style={{ flex: 1, minWidth: 0, overflowY: 'auto', padding: '14px 20px 40px' }}>
+      <div style={{ flex: 1, minWidth: 0, overflowY: 'auto', padding: '24px 32px 48px' }}>
         <Title level={4} style={{ margin: '0 0 10px' }}>بەکارهێنەر و تیم</Title>
 
         {readOnly && (

@@ -3,6 +3,7 @@
 import { Card, Col, Row, Statistic, Tag, Typography } from 'antd';
 import { GlobalOutlined } from '@ant-design/icons';
 import { BarList, ChartCard, ColumnChart } from './charts';
+import { Section } from './ui';
 import type { StatsData } from '@/lib/stats';
 import { ENTITIES, isEntityType } from '@/lib/entities';
 import { c, ISSUE, STATUS, toAr } from '@/lib/tokens';
@@ -37,21 +38,19 @@ export default function StatsView({ data }: { data: StatsData }) {
       </Text>
 
       {/* Corpus totals — the only figures here that also appear publicly. */}
-      <div style={{ margin: '16px 0 8px', display: 'flex', alignItems: 'center', gap: 8 }}>
-        <GlobalOutlined style={{ color: c.inkFaint }} />
-        <Text strong style={{ fontSize: 16 }}>کۆی داتا</Text>
-        <Tag style={{ marginInlineEnd: 0 }}>api.openhadith.org</Tag>
-      </div>
-      <Row gutter={[12, 12]}>
+      <Section
+        title={<><GlobalOutlined style={{ marginInlineEnd: 7 }} />کۆی داتا</>}
+        action={<Tag style={{ marginInlineEnd: 0 }}>api.openhadith.org</Tag>}
+      >
+        <Row gutter={[20, 20]}>
         <Col xs={24} sm={8}><Tile title="حەدیس" value={corpus.hadiths === null ? '—' : toAr(corpus.hadiths.toLocaleString('en'))} /></Col>
         <Col xs={24} sm={8}><Tile title="پەرتووک" value={corpus.books === null ? '—' : toAr(corpus.books.toLocaleString('en'))} /></Col>
         <Col xs={24} sm={8}><Tile title="ڕاوی" value={corpus.narrators === null ? '—' : toAr(corpus.narrators.toLocaleString('en'))} /></Col>
-      </Row>
+        </Row>
+      </Section>
 
-      <div style={{ margin: '20px 0 8px' }}>
-        <Text strong style={{ fontSize: 16 }}>کاری وۆرک‌ستەیشن</Text>
-      </div>
-      <Row gutter={[12, 12]}>
+      <Section title="کاری وۆرک‌ستەیشن">
+        <Row gutter={[20, 20]}>
         <Col xs={12} lg={6}>
           <Tile title="ڕەکۆردی ژێر پێداچوونەوە" value={toAr(totals.reviewed)} />
         </Col>
@@ -67,9 +66,11 @@ export default function StatsView({ data }: { data: StatsData }) {
           <Tile title="بڕیار لە ٣٠ ڕۆژدا" value={toAr(totals.decisions30)}
             note={`${toAr(totals.auditEvents)} کردار لە تۆماردا`} />
         </Col>
-      </Row>
+        </Row>
+      </Section>
 
-      <div style={{ marginTop: 14 }}>
+      <Section title="ڕەوت و پێشکەوتن">
+        <div>
         <ChartCard
           title="بڕیارەکان بەپێی ڕۆژ"
           subtitle="پەسەندکردن، ڕەتکردنەوە، یەکخستن و گۆڕینی دۆخ — ٣٠ ڕۆژی ڕابردوو"
@@ -93,9 +94,9 @@ export default function StatsView({ data }: { data: StatsData }) {
             }))}
           />
         </ChartCard>
-      </div>
+        </div>
 
-      <Row gutter={[14, 14]} style={{ marginTop: 14 }}>
+        <Row gutter={[20, 20]} style={{ marginTop: 20 }}>
         <Col xs={24} lg={12}>
           <ChartCard<{ status: string; count: number }>
             title="ڕەکۆردەکان بەپێی دۆخ"
@@ -254,8 +255,9 @@ export default function StatsView({ data }: { data: StatsData }) {
               }))}
             />
           </ChartCard>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      </Section>
     </div>
   );
 }

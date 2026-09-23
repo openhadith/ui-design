@@ -129,7 +129,7 @@ export default function WorkstationView({
         {/* record header */}
         <div
           style={{
-            flex: 'none', padding: '10px 20px', background: shell.card,
+            flex: 'none', padding: '14px 32px', background: shell.card,
             borderBottom: `1px solid ${shell.cardBorder}`,
             display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
           }}
@@ -155,7 +155,7 @@ export default function WorkstationView({
           </Button>
         </div>
 
-        <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '16px 20px 40px', display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '24px 32px 48px', display: 'flex', flexDirection: 'column', gap: 20 }}>
           {!hadith && (
             <Alert type="warning" showIcon title="نەتوانرا داتای حەدیس لە API بهێنرێت — دۆخی کار هێشتا دەردەکەوێت." />
           )}
@@ -278,7 +278,7 @@ export default function WorkstationView({
         {/* action bar */}
         <div
           style={{
-            flex: 'none', display: 'flex', alignItems: 'center', gap: 8, padding: '10px 20px',
+            flex: 'none', display: 'flex', alignItems: 'center', gap: 10, padding: '14px 32px',
             background: shell.card, borderTop: `1px solid ${shell.cardBorder}`, flexWrap: 'wrap',
           }}
         >
