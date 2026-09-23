@@ -135,14 +135,14 @@ export default function WorkstationView({
           }}
         >
           <Link href="/queue"><Button size="small" type="text" icon={<ArrowRightOutlined />}>ڕیز</Button></Link>
-          <Text strong style={{ fontSize: 15 }}>
+          <Text strong style={{ fontSize: 16.5 }}>
             <span dir="ltr" style={{ unicodeBidi: 'isolate' }}>HDT-{id}</span>
           </Text>
           <TokenTag token={status} />
           <TokenTag token={grade} title={hukmLabel(rawGrade) ?? 'پلە لە سەرچاوەی ڕەسەن'} />
           {issues.map((is, k) => <TokenTag key={k} token={ISSUE[is.type] ?? ISSUE.unknown} />)}
-          {hadith?.book?.title && <Text type="secondary" style={{ fontSize: 13.5 }}>· {hadith.book.title}</Text>}
-          {hadith?.hadithid && <Text type="secondary" style={{ fontSize: 13.5 }}>ژمارە {toAr(hadith.hadithid)}</Text>}
+          {hadith?.book?.title && <Text type="secondary" style={{ fontSize: 15 }}>· {hadith.book.title}</Text>}
+          {hadith?.hadithid && <Text type="secondary" style={{ fontSize: 15 }}>ژمارە {toAr(hadith.hadithid)}</Text>}
           <Button
             size="small"
             type="link"
@@ -173,7 +173,7 @@ export default function WorkstationView({
               variant="borderless"
               dir="rtl"
               autoSize={{ minRows: 3, maxRows: 10 }}
-              style={{ ...AMIRI, fontSize: 18, lineHeight: 2, padding: '12px 16px' }}
+              style={{ ...AMIRI, fontSize: 19.5, lineHeight: 2, padding: '12px 16px' }}
             />
           </Card>
 
@@ -187,7 +187,7 @@ export default function WorkstationView({
                     <Tag color="warning" style={{ marginInlineEnd: 0 }}>دەستکاریکراو</Tag>
                   </Tooltip>
                 )}
-                <Text type="secondary" style={{ fontSize: 13 }}>{toAr(chain.length)} ڕاوی</Text>
+                <Text type="secondary" style={{ fontSize: 15 }}>{toAr(chain.length)} ڕاوی</Text>
                 <Button
                   size="small"
                   icon={<EditOutlined />}
@@ -196,7 +196,7 @@ export default function WorkstationView({
                 >
                   دەستکاری
                 </Button>
-                <Link href={`/sanad?id=${id}`} style={{ fontSize: 13.5 }}>پشکنینی سەنەد</Link>
+                <Link href={`/sanad?id=${id}`} style={{ fontSize: 15 }}>پشکنینی سەنەد</Link>
               </Space>
             }
           >
@@ -220,12 +220,12 @@ export default function WorkstationView({
                           styles={{ body: { padding: '8px 11px' } }}>
                           <Space size={6}>
                             <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, display: 'inline-block' }} />
-                            <Text strong ellipsis style={{ ...AMIRI, fontSize: 16, maxWidth: 170 }}>
+                            <Text strong ellipsis style={{ ...AMIRI, fontSize: 17.5, maxWidth: 170 }}>
                               {link.rawy?.Shohra || link.rawy?.Name}
                             </Text>
                           </Space>
                           <div>
-                            <Text type="secondary" ellipsis style={{ fontSize: 12.5, maxWidth: 190 }}>
+                            <Text type="secondary" ellipsis style={{ fontSize: 14.5, maxWidth: 190 }}>
                               {bio?.rutba_description ?? ''}
                               {link.rawy?.DeathYear ? ` · ت ${toAr(link.rawy.DeathYear)}` : ''}
                             </Text>
@@ -256,13 +256,13 @@ export default function WorkstationView({
               {hadith!.assessments!.map((a) => (
                 <div key={a.index} style={{ padding: '9px 14px', borderBottom: `1px solid ${c.lineSoft}` }}>
                   <Space size={8} style={{ marginBottom: 4 }}>
-                    <Text strong style={{ fontSize: 13 }}>إسناد {toAr(a.index)}</Text>
+                    <Text strong style={{ fontSize: 15 }}>إسناد {toAr(a.index)}</Text>
                     {a.grades.map((g) => (
                       <TokenTag key={g} token={GRADE[gradeKeyOf(g)] ?? GRADE.unknown} title={hukmLabel(g) ?? undefined} />
                     ))}
-                    <Text type="secondary" style={{ fontSize: 13 }}>{toAr(a.branches.length)} لق</Text>
+                    <Text type="secondary" style={{ fontSize: 15 }}>{toAr(a.branches.length)} لق</Text>
                   </Space>
-                  {a.sharh && <div style={{ ...AMIRI, fontSize: 16, lineHeight: 1.9 }}>{a.sharh}</div>}
+                  {a.sharh && <div style={{ ...AMIRI, fontSize: 17.5, lineHeight: 1.9 }}>{a.sharh}</div>}
                 </div>
               ))}
             </Card>
@@ -270,7 +270,7 @@ export default function WorkstationView({
 
           {hadith?.full_hadith && (
             <Card size="small" title="دەقی تەواو وەک تۆمارکراوە">
-              <div dir="rtl" style={{ ...AMIRI, fontSize: 16.5, lineHeight: 2 }}>{hadith.full_hadith}</div>
+              <div dir="rtl" style={{ ...AMIRI, fontSize: 18, lineHeight: 2 }}>{hadith.full_hadith}</div>
             </Card>
           )}
         </div>
@@ -303,7 +303,7 @@ export default function WorkstationView({
           </Button>
 
           <Space style={{ marginInlineStart: 'auto' }}>
-            {nextId && <Text type="secondary" style={{ fontSize: 13 }}>⌘↵ پاشەکەوت و دواتر</Text>}
+            {nextId && <Text type="secondary" style={{ fontSize: 15 }}>⌘↵ پاشەکەوت و دواتر</Text>}
             <Button
               type="primary"
               icon={<SaveOutlined />}
@@ -344,11 +344,11 @@ export default function WorkstationView({
                   <Space size={6}>
                     <Avatar size={20} style={{
                       background: avatarOf(review.avatar_tone).bg, color: avatarOf(review.avatar_tone).fg,
-                      fontSize: 11, fontWeight: 600,
+                      fontSize: 13, fontWeight: 600,
                     }}>
                       {initials(review.assignee_name)}
                     </Avatar>
-                    <Text style={{ fontSize: 13.5 }}>{review.assignee_name}</Text>
+                    <Text style={{ fontSize: 15 }}>{review.assignee_name}</Text>
                   </Space>
                 ) : <Text type="secondary">نەدابەشکراو</Text>,
               },
@@ -370,7 +370,7 @@ export default function WorkstationView({
 
         {hadith?.hukmText && (
           <Card size="small" title="حوکمی تۆمارکراو">
-            <div style={{ ...AMIRI, fontSize: 16, lineHeight: 1.9 }}>{hadith.hukmText}</div>
+            <div style={{ ...AMIRI, fontSize: 17.5, lineHeight: 1.9 }}>{hadith.hukmText}</div>
           </Card>
         )}
 
@@ -382,9 +382,9 @@ export default function WorkstationView({
               items={revisions.map((rv) => ({
                 content: (
                   <div>
-                    <Text strong style={{ fontSize: 13.5 }}>{rv.author_name ?? 'سیستەم'}</Text>{' '}
-                    <Text type="secondary" style={{ fontSize: 13 }}>{agoKu(rv.created_at)}</Text>
-                    {rv.note && <div><Text type="secondary" style={{ fontSize: 13 }}>{rv.note}</Text></div>}
+                    <Text strong style={{ fontSize: 15 }}>{rv.author_name ?? 'سیستەم'}</Text>{' '}
+                    <Text type="secondary" style={{ fontSize: 15 }}>{agoKu(rv.created_at)}</Text>
+                    {rv.note && <div><Text type="secondary" style={{ fontSize: 15 }}>{rv.note}</Text></div>}
                   </div>
                 ),
               }))}

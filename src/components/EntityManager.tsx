@@ -177,7 +177,7 @@ export default function EntityManager({ type }: { type: EntityType }) {
             <Tag color="warning">دەستکاریکراو</Tag>
           </Tooltip>
         ) : (
-          <Text style={{ fontSize: 13, color: c.inkPale }}>ڕەسەن</Text>
+          <Text style={{ fontSize: 15, color: c.inkPale }}>ڕەسەن</Text>
         ),
     },
     {
@@ -241,7 +241,7 @@ export default function EntityManager({ type }: { type: EntityType }) {
         }}
       >
         <Typography.Title level={4} style={{ margin: 0 }}>{def.labelPlural}</Typography.Title>
-        <Text style={{ fontSize: 14, color: c.inkDim }}>{toAr(total)}</Text>
+        <Text style={{ fontSize: 16, color: c.inkDim }}>{toAr(total)}</Text>
 
         <Space style={{ marginInlineStart: 'auto' }}>
           <Input.Search
@@ -268,7 +268,7 @@ export default function EntityManager({ type }: { type: EntityType }) {
             style={{ marginBottom: 12 }}
             title="ڕەکۆردە شاردراوەکان"
             description={
-              <span style={{ fontSize: 13.5 }}>
+              <span style={{ fontSize: 15 }}>
                 ئەمانە لە لیستەکاندا نانێردرێن. داتای سەرەکییان نەگۆڕ ماوە و
                 دەکرێن بگەڕێنرێنەوە.
               </span>
@@ -288,7 +288,7 @@ export default function EntityManager({ type }: { type: EntityType }) {
             style={{ marginBottom: 12 }}
             title={`${toAr(dirty)} گۆڕانکاری لە وۆرک‌ستەیشندا هەڵگیراوە`}
             description={
-              <span style={{ fontSize: 13.5 }}>
+              <span style={{ fontSize: 15 }}>
                 {toAr(summary.created)} نوێ · {toAr(summary.edited)} دەستکاریکراو ·{' '}
                 {toAr(summary.deleted)} شاردراوە — ئەمانە لێرە هەڵدەگیرێن و هیچ
                 کاریگەرییەکیان لەسەر ماڵپەڕی گشتی نییە.
@@ -353,7 +353,7 @@ export default function EntityManager({ type }: { type: EntityType }) {
             style={{ marginBottom: 14 }}
             title="دەستکاری داتای ڕەسەن"
             description={
-              <span style={{ fontSize: 13.5, lineHeight: 1.8 }}>
+              <span style={{ fontSize: 15, lineHeight: 1.8 }}>
                 ئەم ڕەکۆردە لە سەرچاوەی ڕەسەنەوە دێت. گۆڕانکارییەکان وەک چینێکی
                 جیاواز لە وۆرک‌ستەیشندا هەڵدەگیرێن — سەرچاوەکە نەگۆڕ دەمێنێتەوە.
               </span>
@@ -383,25 +383,25 @@ export default function EntityManager({ type }: { type: EntityType }) {
 /** Table cell rendering, by field kind. */
 function renderCell(f: FieldDef, value: unknown) {
   if (value === null || value === undefined || value === '') {
-    return <Text style={{ color: c.inkPale, fontSize: 13 }}>—</Text>;
+    return <Text style={{ color: c.inkPale, fontSize: 15 }}>—</Text>;
   }
   if (f.kind === 'switch') {
     return value ? <Tag color="warning">بەڵێ</Tag> : <Text style={{ color: c.inkPale }}>نەخێر</Text>;
   }
   if (f.kind === 'number') {
-    return <Text style={{ fontSize: 14 }}>{toAr(String(value))}</Text>;
+    return <Text style={{ fontSize: 16 }}>{toAr(String(value))}</Text>;
   }
   if (f.kind === 'arabic') {
     return (
       <span
         dir="rtl"
-        style={{ fontFamily: 'var(--font-amiri), serif', fontSize: 16, lineHeight: 1.7 }}
+        style={{ fontFamily: 'var(--font-amiri), serif', fontSize: 17.5, lineHeight: 1.7 }}
       >
         {String(value)}
       </span>
     );
   }
-  return <Text style={{ fontSize: 14 }}>{String(value)}</Text>;
+  return <Text style={{ fontSize: 16 }}>{String(value)}</Text>;
 }
 
 /** Form control, by field kind. */
@@ -412,7 +412,7 @@ function renderInput(f: FieldDef) {
         <Input.TextArea
           autoSize={{ minRows: 1, maxRows: 8 }}
           dir="rtl"
-          style={{ fontFamily: 'var(--font-amiri), serif', fontSize: 16.5, lineHeight: 1.9 }}
+          style={{ fontFamily: 'var(--font-amiri), serif', fontSize: 18, lineHeight: 1.9 }}
         />
       );
     case 'textarea':

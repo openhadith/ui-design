@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Amiri, IBM_Plex_Sans_Arabic } from 'next/font/google';
+import { Amiri, IBM_Plex_Sans_Arabic, Outfit } from 'next/font/google';
 import './globals.css';
 import { StudioProvider } from '@/components/StudioContext';
 import AntdProvider from '@/components/AntdProvider';
@@ -7,14 +7,21 @@ import StudioChrome from '@/components/StudioChrome';
 import { query } from '@/lib/db';
 
 /**
- * Two families, matching the public site so the two applications read as one
- * product:
+ * Three families, each with a job:
  *
- * - IBM Plex Sans Arabic for everything in the interface. It covers Latin and
- *   Arabic script alike, which matters when Kurdish chrome carries numerals.
- * - Amiri for Arabic matn and narrator names, where a serif reads better at
+ * - Outfit sets the interface — labels, numbers, buttons. It is Latin-only, so
+ *   it is first in the stack and the browser falls back per glyph.
+ * - IBM Plex Sans Arabic picks up the Kurdish chrome, including the extended
+ *   glyphs Sorani needs, which Outfit cannot render at all.
+ * - Amiri sets Arabic matn and narrator names, where a serif reads better at
  *   the sizes this content is set in.
  */
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-outfit',
+  display: 'swap',
+});
 const plexArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic'],
   weight: ['300', '400', '500', '600', '700'],
@@ -71,7 +78,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html
       lang="ckb"
       dir="rtl"
-      className={`${plexArabic.variable} ${amiri.variable}`}
+      className={`${outfit.variable} ${plexArabic.variable} ${amiri.variable}`}
     >
       <body>
         <AntdProvider>

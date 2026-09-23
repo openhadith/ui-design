@@ -67,11 +67,11 @@ export default function DashboardView({ data }: { data: DashboardData }) {
         <Card style={{ marginBottom: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap' }}>
             <div style={{ minWidth: 190 }}>
-              <div style={{ fontSize: 12.5, color: c.inkFaint, marginBottom: 4 }}>ئەمڕۆ</div>
-              <div style={{ fontSize: 15, color: c.ink }}>
+              <div style={{ fontSize: 14.5, color: c.inkFaint, marginBottom: 4 }}>ئەمڕۆ</div>
+              <div style={{ fontSize: 16.5, color: c.ink }}>
                 {today.done > 0 ? (
                   <>
-                    <b style={{ fontSize: 22 }}>{toAr(today.done)}</b>
+                    <b style={{ fontSize: 24 }}>{toAr(today.done)}</b>
                     <span style={{ color: c.inkFaint }}> لە {toAr(today.target)} · {toAr(today.remaining)} ماوە</span>
                   </>
                 ) : (
@@ -86,7 +86,7 @@ export default function DashboardView({ data }: { data: DashboardData }) {
               strokeColor={c.emerald}
               railColor="#efeae0"
               style={{ flex: 1, minWidth: 220, margin: 0 }}
-              format={(p) => <span style={{ fontSize: 12.5, color: c.inkFaint }}>{toAr(p ?? 0)}٪</span>}
+              format={(p) => <span style={{ fontSize: 14.5, color: c.inkFaint }}>{toAr(p ?? 0)}٪</span>}
             />
             {resume.length > 0 && (
               <Link href={`/hadith/${resume[0].entity_id}`} className="plain" style={{ flex: '1 1 320px', minWidth: 0 }}>
@@ -98,7 +98,7 @@ export default function DashboardView({ data }: { data: DashboardData }) {
                 >
                   <ArrowLeftOutlined style={{ color: c.emerald, flex: 'none' }} />
                   <span style={{ flex: 1, minWidth: 0 }}>
-                    <span style={{ display: 'block', fontSize: 11.5, color: c.emerald, fontWeight: 600 }}>
+                    <span style={{ display: 'block', fontSize: 13.5, color: c.emerald, fontWeight: 600 }}>
                       بگەڕەوە بۆ کارە ناتەواوەکەت
                     </span>
                     <Matn size={14} clamp>{resume[0].label}</Matn>
@@ -164,7 +164,7 @@ export default function DashboardView({ data }: { data: DashboardData }) {
                     key={w.day}
                     style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 7 }}
                   >
-                    <span style={{ fontSize: 11.5, fontWeight: isPeak ? 700 : 400, color: isPeak ? c.emerald : c.inkGhost }}>
+                    <span style={{ fontSize: 13.5, fontWeight: isPeak ? 700 : 400, color: isPeak ? c.emerald : c.inkGhost }}>
                       {toAr(w.count)}
                     </span>
                     <Tooltip title={`${w.day} — ${toAr(w.count)} بڕیار`}>
@@ -177,7 +177,7 @@ export default function DashboardView({ data }: { data: DashboardData }) {
                         }}
                       />
                     </Tooltip>
-                    <span style={{ fontSize: 11.5, color: c.inkFaint }}>
+                    <span style={{ fontSize: 13.5, color: c.inkFaint }}>
                       {['ی', 'د', 'س', 'چ', 'پ', 'ه', 'ش'][day.getDay()]}
                     </span>
                   </div>
@@ -196,18 +196,18 @@ export default function DashboardView({ data }: { data: DashboardData }) {
                 railColor="#efeae0"
                 format={(p) => (
                   <span style={{ lineHeight: 1.2 }}>
-                    <span style={{ display: 'block', fontSize: 20, fontWeight: 700, color: c.emerald }}>
+                    <span style={{ display: 'block', fontSize: 22, fontWeight: 700, color: c.emerald }}>
                       {toAr(p ?? 0)}٪
                     </span>
-                    <span style={{ display: 'block', fontSize: 11, color: c.inkGhost }}>بێ کێشە</span>
+                    <span style={{ display: 'block', fontSize: 13, color: c.inkGhost }}>بێ کێشە</span>
                   </span>
                 )}
               />
-              <div style={{ flex: 1, fontSize: 13, lineHeight: 2.05, color: c.inkMuted }}>
+              <div style={{ flex: 1, fontSize: 15, lineHeight: 2.05, color: c.inkMuted }}>
                 <Legend color={c.emerald} label="بێ کێشە" value={health.clean} />
                 <Legend color={c.rust} label="کێشەی کراوە" value={health.openIssues} />
                 <Legend color="#e4ded1" label="کۆی ڕەکۆرد" value={health.total} />
-                <Link href="/admin/quality" style={{ fontSize: 12.5 }}>هەموو کێشەکان →</Link>
+                <Link href="/admin/quality" style={{ fontSize: 14.5 }}>هەموو کێشەکان →</Link>
               </div>
             </div>
           </Card>
@@ -225,16 +225,16 @@ export default function DashboardView({ data }: { data: DashboardData }) {
               recentEdits.map((e) => (
                 <div key={e.id} style={ROW}>
                   <span style={{ width: 7, height: 7, borderRadius: '50%', background: c.gold, flex: 'none' }} />
-                  <span style={{ flex: 1, minWidth: 0, fontSize: 13.5 }} className="clamp-1">
+                  <span style={{ flex: 1, minWidth: 0, fontSize: 15 }} className="clamp-1">
                     <b>{e.actor_name ?? 'سیستەم'}</b>{' '}
                     <span style={{ color: c.inkFaint }}>{ACTION_LABEL[e.action] ?? e.action}</span>
                   </span>
                   {e.entity_id && (
-                    <span style={{ fontSize: 12, color: c.inkGhost, flex: 'none' }}>
+                    <span style={{ fontSize: 14, color: c.inkGhost, flex: 'none' }}>
                       <RecordId id={e.entity_id} />
                     </span>
                   )}
-                  <span style={{ fontSize: 12, color: c.inkGhost, flex: 'none' }}>{agoKu(e.created_at)}</span>
+                  <span style={{ fontSize: 14, color: c.inkGhost, flex: 'none' }}>{agoKu(e.created_at)}</span>
                 </div>
               ))
             )}
@@ -247,9 +247,9 @@ export default function DashboardView({ data }: { data: DashboardData }) {
               pinned.map((p) => (
                 <Link key={p.entity_id} href={`/hadith/${p.entity_id}`} className="plain">
                   <div style={ROW}>
-                    <StarFilled style={{ color: c.gold, fontSize: 13 }} />
+                    <StarFilled style={{ color: c.gold, fontSize: 15 }} />
                     <Matn size={14} clamp style={{ flex: 1, minWidth: 0 }}>{p.label}</Matn>
-                    <span style={{ fontSize: 12, color: c.inkGhost, flex: 'none' }}>{p.detail}</span>
+                    <span style={{ fontSize: 14, color: c.inkGhost, flex: 'none' }}>{p.detail}</span>
                   </div>
                 </Link>
               ))
@@ -264,15 +264,15 @@ export default function DashboardView({ data }: { data: DashboardData }) {
             const tone = avatarOf(a.avatar_tone);
             return (
               <div key={a.id} style={{ ...ROW, alignItems: 'flex-start', gap: 10 }}>
-                <Avatar size={26} style={{ background: tone.bg, color: tone.fg, fontSize: 10.5, fontWeight: 600, flex: 'none' }}>
+                <Avatar size={26} style={{ background: tone.bg, color: tone.fg, fontSize: 13, fontWeight: 600, flex: 'none' }}>
                   {initials(a.actor_name)}
                 </Avatar>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 13, lineHeight: 1.5 }}>
+                  <div style={{ fontSize: 15, lineHeight: 1.5 }}>
                     <b>{a.actor_name ?? 'سیستەم'}</b>{' '}
                     <span style={{ color: c.inkFaint }}>{ACTION_LABEL[a.action] ?? a.action}</span>
                   </div>
-                  <div style={{ fontSize: 11.5, color: c.inkGhost }}>
+                  <div style={{ fontSize: 13.5, color: c.inkGhost }}>
                     {a.entity_id ? <><RecordId id={a.entity_id} />{' · '}</> : null}
                     {agoKu(a.created_at)}
                   </div>
@@ -290,14 +290,14 @@ export default function DashboardView({ data }: { data: DashboardData }) {
             const tone = avatarOf(l.avatar_tone);
             return (
               <div key={l.name} style={ROW}>
-                <b style={{ width: 14, textAlign: 'center', fontSize: 12.5, color: i < 2 ? c.gold : c.inkGhost }}>
+                <b style={{ width: 14, textAlign: 'center', fontSize: 14.5, color: i < 2 ? c.gold : c.inkGhost }}>
                   {toAr(i + 1)}
                 </b>
-                <Avatar size={26} style={{ background: tone.bg, color: tone.fg, fontSize: 10.5, fontWeight: 600 }}>
+                <Avatar size={26} style={{ background: tone.bg, color: tone.fg, fontSize: 13, fontWeight: 600 }}>
                   {initials(l.name)}
                 </Avatar>
-                <span style={{ flex: 1, fontSize: 13 }}>{l.name}</span>
-                <b style={{ fontSize: 13, fontVariantNumeric: 'tabular-nums' }}>{toAr(l.count)}</b>
+                <span style={{ flex: 1, fontSize: 15 }}>{l.name}</span>
+                <b style={{ fontSize: 15, fontVariantNumeric: 'tabular-nums' }}>{toAr(l.count)}</b>
               </div>
             );
           })}
@@ -319,7 +319,7 @@ function Legend({ color, label, value }: { color: string; label: string; value: 
 
 function Empty({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{ padding: '22px 18px', textAlign: 'center', fontSize: 13, color: c.inkPale }}>
+    <div style={{ padding: '22px 18px', textAlign: 'center', fontSize: 15, color: c.inkPale }}>
       {children}
     </div>
   );

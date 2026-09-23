@@ -98,7 +98,7 @@ export default function LoginView({
             style={{
               width: 40, height: 40, borderRadius: 10, background: c.emerald, color: '#fff',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontFamily: 'var(--font-amiri), serif', fontWeight: 700, fontSize: 26,
+              fontFamily: 'var(--font-amiri), serif', fontWeight: 700, fontSize: 28,
             }}
           >
             ح
@@ -107,7 +107,7 @@ export default function LoginView({
             <Title level={4} style={{ margin: 0, color: c.inkStrong }}>
               دەزگای پەسەندکردنی حەدیس
             </Title>
-            <Text style={{ fontSize: 13.5, color: c.inkDim }}>
+            <Text style={{ fontSize: 15, color: c.inkDim }}>
               Muhaqqiq · وۆرک‌ستەیشنی بەڕێوەبردن
             </Text>
           </div>
@@ -119,7 +119,7 @@ export default function LoginView({
             showIcon
             title="داتابەیسی نموونە ئامادە نییە"
             description={
-              <span style={{ fontSize: 14 }}>
+              <span style={{ fontSize: 16 }}>
                 <code>npm run db:setup</code> جێبەجێ بکە، پاشان ئەم پەڕەیە نوێ بکەرەوە.
               </span>
             }
@@ -131,7 +131,7 @@ export default function LoginView({
           showIcon
           title="چوونەژوورەوەی نموونەیی"
           description={
-            <span style={{ fontSize: 14, lineHeight: 1.9 }}>
+            <span style={{ fontSize: 16, lineHeight: 1.9 }}>
               وشەی نهێنی پێویست نییە. هەژمارێک هەڵبژێرە یان ئیمەیلێک بنووسە — ڕۆڵەکە
               دیاری دەکات چی دەبینیت و چی دەتوانیت بکەیت، چونکە مۆڵەتەکان بەڕاستی
               لە ماتریکسی ڕۆڵەوە جێبەجێ دەکرێن.
@@ -141,7 +141,7 @@ export default function LoginView({
         />
 
         <Card styles={{ body: { padding: 18 } }}>
-          <Text strong style={{ fontSize: 14.5, color: c.inkMuted }}>
+          <Text strong style={{ fontSize: 16, color: c.inkMuted }}>
             هەژمارە بەردەستەکان
           </Text>
           <div
@@ -170,19 +170,19 @@ export default function LoginView({
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <Avatar
                       size={32}
-                      style={{ background: tone.bg, color: tone.fg, fontSize: 14, fontWeight: 600 }}
+                      style={{ background: tone.bg, color: tone.fg, fontSize: 16, fontWeight: 600 }}
                     >
                       {initials(a.name)}
                     </Avatar>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: 15, fontWeight: 600, color: c.ink }}>{a.name}</div>
-                      <div dir="ltr" style={{ fontSize: 13, color: c.inkGhost, textAlign: 'start' }}>
+                      <div style={{ fontSize: 16.5, fontWeight: 600, color: c.ink }}>{a.name}</div>
+                      <div dir="ltr" style={{ fontSize: 15, color: c.inkGhost, textAlign: 'start' }}>
                         {a.email}
                       </div>
                     </div>
                     <Tag
                       color={ROLE_COLOR[a.role]}
-                      style={{ marginInlineEnd: 0, fontSize: 13 }}
+                      style={{ marginInlineEnd: 0, fontSize: 15 }}
                     >
                       {ROLE_LABEL[a.role] ?? a.role}
                     </Tag>
@@ -193,7 +193,7 @@ export default function LoginView({
                       <span
                         key={p}
                         style={{
-                          fontSize: 12.5, padding: '1px 6px', borderRadius: 5,
+                          fontSize: 14.5, padding: '1px 6px', borderRadius: 5,
                           background: c.sunken, color: c.inkFaint,
                         }}
                       >
@@ -201,7 +201,7 @@ export default function LoginView({
                       </span>
                     ))}
                     {disabled && (
-                      <span style={{ fontSize: 12.5, color: c.rust }}>· ناچالاک</span>
+                      <span style={{ fontSize: 14.5, color: c.rust }}>· ناچالاک</span>
                     )}
                   </div>
                 </button>
@@ -210,7 +210,7 @@ export default function LoginView({
           </div>
 
           <Divider style={{ margin: '18px 0 14px' }}>
-            <Text style={{ fontSize: 13, color: c.inkGhost }}>یان</Text>
+            <Text style={{ fontSize: 15, color: c.inkGhost }}>یان</Text>
           </Divider>
 
           <Form
@@ -233,7 +233,7 @@ export default function LoginView({
           </Form>
         </Card>
 
-        <Text style={{ fontSize: 13, color: c.inkGhost, textAlign: 'center' }}>
+        <Text style={{ fontSize: 15, color: c.inkGhost, textAlign: 'center' }}>
           داتای حەدیس ڕاستەقینەیە و لە api.openhadith.org دێت. دۆخی کار و ئەم هەژمارانە
           نموونەیین و هیچ کاریگەرییەکیان لەسەر ماڵپەڕی گشتی نییە.
         </Text>

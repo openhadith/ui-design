@@ -195,10 +195,12 @@ by id such as `HDT-4508`, and live corpus search); `↑↓` move, `Space` select
   so built-in strings match the chrome.
 - Toasts go through `App.useApp()`, never the static `message.*` export, which
   renders outside the theme context.
-- **Type:** the same family and rhythm as the public reading site — IBM Plex
-  Sans Arabic at a 15px base with a 1.7 line-height (one step below the site's
-  16px, since a dashboard carries more chrome per screen). Arabic matn is set
-  in Amiri. Controls are sized to match, above AntD's defaults.
+- **Type:** three families, stacked so the browser picks per glyph. **Outfit**
+  sets the interface — labels, numbers, buttons — but is Latin-only, so Kurdish
+  and Arabic fall through to **IBM Plex Sans Arabic**, the public site's face.
+  Arabic matn is **Amiri**. The base is 16px on a 1.7 line-height, matching the
+  reading site rather than shrinking for density; AntD controls and table cells
+  are sized up to match.
 
 ---
 

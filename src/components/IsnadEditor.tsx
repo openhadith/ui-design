@@ -173,7 +173,7 @@ export default function IsnadEditor({
         showIcon
         style={{ marginBottom: 14 }}
         title={
-          <span style={{ fontSize: 13.5, lineHeight: 1.8 }}>
+          <span style={{ fontSize: 15, lineHeight: 1.8 }}>
             ڕیزبەندی بە شێوەی خوێندنەوەیە: سەرچاوە لە سەرەوە، کۆکەرەوە لە خوارەوە. گۆڕانکارییەکان
             لە وۆرک‌ستەیشندا هەڵدەگیرێن و زنجیرەی ڕەسەن نەگۆڕ دەمێنێتەوە.
           </span>
@@ -196,15 +196,15 @@ export default function IsnadEditor({
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <Text style={{ width: 20, textAlign: 'center', fontSize: 13, color: c.inkGhost }}>
+                  <Text style={{ width: 20, textAlign: 'center', fontSize: 15, color: c.inkGhost }}>
                     {toAr(i + 1)}
                   </Text>
                   <span style={{ width: 8, height: 8, borderRadius: '50%', background: dot, flex: 'none' }} />
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <Text strong ellipsis style={{ ...AMIRI, fontSize: 16.5, display: 'block' }}>
+                    <Text strong ellipsis style={{ ...AMIRI, fontSize: 18, display: 'block' }}>
                       {l.rawy?.Shohra || l.rawy?.Name}
                     </Text>
-                    <Text type="secondary" style={{ fontSize: 13 }}>
+                    <Text type="secondary" style={{ fontSize: 15 }}>
                       {l.rawy?.bio?.rutba_description ?? ''}
                       {l.rawy?.DeathYear ? ` · ت ${toAr(l.rawy.DeathYear)}` : ''}
                       {l.id.startsWith('studio-') ? ' · زیادکراو' : ''}
@@ -246,7 +246,7 @@ export default function IsnadEditor({
           border: `1px dashed ${c.lineNav}`,
         }}
       >
-        <Text strong style={{ fontSize: 14, display: 'block', marginBottom: 8 }}>
+        <Text strong style={{ fontSize: 16, display: 'block', marginBottom: 8 }}>
           <PlusOutlined /> زیادکردنی ڕاوی
         </Text>
         <Space.Compact style={{ width: '100%' }}>
@@ -270,8 +270,8 @@ export default function IsnadEditor({
               value: String(h.id),
               label: (
                 <span>
-                  <span style={{ ...AMIRI, fontSize: 16 }}>{h.shohra || h.name}</span>
-                  {h.deathdate && <Text type="secondary" style={{ fontSize: 13 }}> · ت {toAr(h.deathdate)}</Text>}
+                  <span style={{ ...AMIRI, fontSize: 17.5 }}>{h.shohra || h.name}</span>
+                  {h.deathdate && <Text type="secondary" style={{ fontSize: 15 }}> · ت {toAr(h.deathdate)}</Text>}
                 </span>
               ),
             }))}

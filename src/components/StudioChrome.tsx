@@ -167,7 +167,7 @@ export default function StudioChrome({
 
       <div className="shell">
         <header className="shell-header">
-          <span style={{ fontSize: 14.5, fontWeight: 600, color: c.inkStrong, whiteSpace: 'nowrap' }}>
+          <span style={{ fontSize: 16, fontWeight: 600, color: c.inkStrong, whiteSpace: 'nowrap' }}>
             {TITLES[active] ?? 'داشبۆرد'}
           </span>
 
@@ -204,7 +204,7 @@ export default function StudioChrome({
               href={SITE_URL}
               target="_blank"
               rel="noreferrer"
-              style={{ color: c.inkFaint, display: 'grid', placeItems: 'center', fontSize: 15 }}
+              style={{ color: c.inkFaint, display: 'grid', placeItems: 'center', fontSize: 16.5 }}
             >
               <ExportOutlined />
             </a>
@@ -219,8 +219,8 @@ export default function StudioChrome({
                   disabled: true,
                   label: (
                     <div style={{ paddingBlock: 4 }}>
-                      <div style={{ fontSize: 13, fontWeight: 600, color: c.ink }}>{user.name}</div>
-                      <div dir="ltr" style={{ fontSize: 11.5, color: c.inkGhost, textAlign: 'start' }}>
+                      <div style={{ fontSize: 15, fontWeight: 600, color: c.ink }}>{user.name}</div>
+                      <div dir="ltr" style={{ fontSize: 13.5, color: c.inkGhost, textAlign: 'start' }}>
                         {user.email}
                       </div>
                     </div>
@@ -231,7 +231,7 @@ export default function StudioChrome({
                   key: 'role',
                   disabled: true,
                   icon: <SafetyOutlined />,
-                  label: <span style={{ fontSize: 12.5 }}>{ROLE_LABEL[user.role] ?? user.role}</span>,
+                  label: <span style={{ fontSize: 14.5 }}>{ROLE_LABEL[user.role] ?? user.role}</span>,
                 },
                 { type: 'divider' },
                 { key: 'logout', icon: <LogoutOutlined />, label: 'دەرچوون', onClick: logout },
@@ -246,16 +246,16 @@ export default function StudioChrome({
               }}
             >
               <span style={{ textAlign: 'start' }}>
-                <span style={{ display: 'block', fontSize: 12.5, fontWeight: 600, color: c.ink }}>
+                <span style={{ display: 'block', fontSize: 14.5, fontWeight: 600, color: c.ink }}>
                   {user.name}
                 </span>
-                <span style={{ display: 'block', fontSize: 11, color: c.inkGhost }}>
+                <span style={{ display: 'block', fontSize: 13, color: c.inkGhost }}>
                   {ROLE_LABEL[user.role] ?? user.role}
                 </span>
               </span>
               <Avatar
                 size={32}
-                style={{ background: tone.bg, color: tone.fg, fontSize: 12, fontWeight: 600 }}
+                style={{ background: tone.bg, color: tone.fg, fontSize: 14, fontWeight: 600 }}
               >
                 {initials(user.name)}
               </Avatar>

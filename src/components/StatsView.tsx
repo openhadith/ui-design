@@ -15,12 +15,12 @@ function Tile({ title, value, suffix, note }: { title: string; value: string; su
   return (
     <Card size="small" style={{ height: '100%' }}>
       <Statistic
-        title={<span style={{ fontSize: 13.5 }}>{title}</span>}
+        title={<span style={{ fontSize: 15 }}>{title}</span>}
         value={value}
         suffix={suffix}
-        styles={{ content: { fontSize: 26, fontWeight: 700, color: c.inkStrong } }}
+        styles={{ content: { fontSize: 28, fontWeight: 700, color: c.inkStrong } }}
       />
-      {note && <Text type="secondary" style={{ fontSize: 13 }}>{note}</Text>}
+      {note && <Text type="secondary" style={{ fontSize: 15 }}>{note}</Text>}
     </Card>
   );
 }
@@ -32,14 +32,14 @@ export default function StatsView({ data }: { data: StatsData }) {
   return (
     <div className="surface">
       <Title level={4} style={{ margin: '0 0 4px' }}>ئامار</Title>
-      <Text type="secondary" style={{ fontSize: 14 }}>
+      <Text type="secondary" style={{ fontSize: 16 }}>
         چالاکی پشتڕاستکردنەوە و پێشکەوتنی تیمەکان — ئەم ژمارانە تەنها لێرەن و لە ماڵپەڕی گشتیدا نین.
       </Text>
 
       {/* Corpus totals — the only figures here that also appear publicly. */}
       <div style={{ margin: '16px 0 8px', display: 'flex', alignItems: 'center', gap: 8 }}>
         <GlobalOutlined style={{ color: c.inkFaint }} />
-        <Text strong style={{ fontSize: 14 }}>کۆی داتا</Text>
+        <Text strong style={{ fontSize: 16 }}>کۆی داتا</Text>
         <Tag style={{ marginInlineEnd: 0 }}>api.openhadith.org</Tag>
       </div>
       <Row gutter={[12, 12]}>
@@ -49,7 +49,7 @@ export default function StatsView({ data }: { data: StatsData }) {
       </Row>
 
       <div style={{ margin: '20px 0 8px' }}>
-        <Text strong style={{ fontSize: 14 }}>کاری وۆرک‌ستەیشن</Text>
+        <Text strong style={{ fontSize: 16 }}>کاری وۆرک‌ستەیشن</Text>
       </div>
       <Row gutter={[12, 12]}>
         <Col xs={12} lg={6}>
@@ -165,7 +165,7 @@ export default function StatsView({ data }: { data: StatsData }) {
               labelWidth={190}
               rows={books.map((b) => ({
                 key: b.book,
-                label: <span style={{ fontFamily: 'var(--font-amiri), serif', fontSize: 15.5 }}>{b.book}</span>,
+                label: <span style={{ fontFamily: 'var(--font-amiri), serif', fontSize: 17 }}>{b.book}</span>,
                 value: b.done,
                 total: b.total,
                 tip: `${toAr(pct(b.done, b.total))}٪`,
